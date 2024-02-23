@@ -1,0 +1,17 @@
+{
+  "name": "cinode-open-api-tmp",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "openapi --input ./cinode-open-api.json --output ./src"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "openapi-typescript-codegen": "^0.27.0",
+    "typescript": "^5.3.3"
+  }
+}
