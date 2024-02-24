@@ -1442,7 +1442,7 @@
               "schema": {
                 "$ref": "#/components/schemas/JsonPatchDocument"
               },
-              "example": [{"value":0,"path":"/pipelineid","op":"replace"},{"value":0,"path":"/pipelinestageid","op":"replace"},{"value":0,"path":"/recruitmentmanagerid","op":"replace"},{"value":0,"path":"/state","op":"replace"},{"value":"2024-02-16T15:24:47.4755052+01:00","path":"/availablefromdate","op":"replace"},{"value":"string","path":"/campaigncode","op":"replace"}]
+              "example": [{"value":0,"path":"/pipelineid","op":"replace"},{"value":0,"path":"/pipelinestageid","op":"replace"},{"value":0,"path":"/recruitmentmanagerid","op":"replace"},{"value":0,"path":"/state","op":"replace"},{"value":"2024-02-24T15:24:13.9037728+01:00","path":"/availablefromdate","op":"replace"},{"value":"string","path":"/campaigncode","op":"replace"}]
             }
           }
         },
@@ -16457,7 +16457,7 @@
               "schema": {
                 "$ref": "#/components/schemas/JsonPatchDocument"
               },
-              "example": [{"value":0,"path":"/status","op":"replace"},{"value":"2024-02-16T15:24:47.7463061+01:00","path":"/employmentstartdate","op":"replace"},{"value":"2024-02-16T15:24:47.7463086+01:00","path":"/employmentenddate","op":"replace"},{"value":"string","path":"/employmentnumber","op":"replace"},{"value":0,"path":"/invoicinggoal","op":"replace"},{"value":0,"path":"/mobility","op":"replace"},{"value":0,"path":"/availabilitypercent","op":"replace"},{"value":"2024-02-16T15:24:47.7463124+01:00","path":"/availablefromdate","op":"replace"},{"value":"string","path":"/title","op":"replace"},{"value":"string","path":"/email","op":"replace"},{"value":"string","path":"/taxtable","op":"replace"},{"value":0,"path":"/basesalary","op":"replace"},{"value":0,"path":"/provision","op":"replace"},{"value":0,"path":"/hourlytargetrate","op":"replace"},{"value":0,"path":"/selfcost","op":"replace"},{"value":0,"path":"/locationid","op":"replace"},{"value":0,"path":"/defaultcurrencyid","op":"replace"},{"value":0,"path":"/displaycurrencyid","op":"replace"},{"value":"string","path":"/firstname","op":"replace"},{"value":"string","path":"/lastname","op":"replace"},{"value":"2024-02-16T15:24:47.7463246+01:00","path":"/dateofbirth","op":"replace"},{"value":0,"path":"/gender","op":"replace"},{"value":0,"path":"/companycalendarid","op":"replace"},{"value":"string","path":"/timezoneid","op":"replace"},{"value":"string","path":"/phone","op":"replace"},{"value":"string","path":"/desiredassignment","op":"replace"},{"value":"string","path":"/internalidentifier","op":"replace"},{"value":"string","path":"/twitter","op":"replace"},{"value":"string","path":"/linkedin","op":"replace"},{"value":"string","path":"/homepage","op":"replace"},{"value":"string","path":"/blog","op":"replace"},{"value":"string","path":"/github","op":"replace"}]
+              "example": [{"value":0,"path":"/status","op":"replace"},{"value":"2024-02-24T15:24:14.147477+01:00","path":"/employmentstartdate","op":"replace"},{"value":"2024-02-24T15:24:14.1474803+01:00","path":"/employmentenddate","op":"replace"},{"value":"string","path":"/employmentnumber","op":"replace"},{"value":0,"path":"/invoicinggoal","op":"replace"},{"value":0,"path":"/mobility","op":"replace"},{"value":0,"path":"/availabilitypercent","op":"replace"},{"value":"2024-02-24T15:24:14.147484+01:00","path":"/availablefromdate","op":"replace"},{"value":"string","path":"/title","op":"replace"},{"value":"string","path":"/email","op":"replace"},{"value":"string","path":"/taxtable","op":"replace"},{"value":0,"path":"/basesalary","op":"replace"},{"value":0,"path":"/provision","op":"replace"},{"value":0,"path":"/hourlytargetrate","op":"replace"},{"value":0,"path":"/selfcost","op":"replace"},{"value":0,"path":"/locationid","op":"replace"},{"value":0,"path":"/defaultcurrencyid","op":"replace"},{"value":0,"path":"/displaycurrencyid","op":"replace"},{"value":"string","path":"/firstname","op":"replace"},{"value":"string","path":"/lastname","op":"replace"},{"value":"2024-02-24T15:24:14.1474927+01:00","path":"/dateofbirth","op":"replace"},{"value":0,"path":"/gender","op":"replace"},{"value":0,"path":"/companycalendarid","op":"replace"},{"value":"string","path":"/timezoneid","op":"replace"},{"value":"string","path":"/phone","op":"replace"},{"value":"string","path":"/desiredassignment","op":"replace"},{"value":"string","path":"/internalidentifier","op":"replace"},{"value":"string","path":"/twitter","op":"replace"},{"value":"string","path":"/linkedin","op":"replace"},{"value":"string","path":"/homepage","op":"replace"},{"value":"string","path":"/blog","op":"replace"},{"value":"string","path":"/github","op":"replace"}]
             }
           }
         },
@@ -51670,10 +51670,11 @@
           60,
           70,
           80,
+          90,
           600
         ],
         "type": "integer",
-        "description": "\n\nCompanyUserResume = 1\n\nCustomers = 2\n\nAssignments = 3\n\nPartners = 4\n\nOffers = 5\n\nReports = 6\n\nRecruitment = 8\n\nAbsence = 9\n\nApi = 10\n\nReferenceText = 11\n\nProfileCompleteness = 12\n\nCalendarSync = 13\n\nAllowWidgetModification = 14\n\nConfiguredFilters = 19\n\nSkillSets = 20\n\nProfileUpdateReminders = 21\n\nOverdueProjectReminders = 22\n\nEmailSync = 23\n\nApplicationRegistration = 30\n\nApplicationDirectory = 31\n\nNextGenResume = 40\n\nHideLinkToMvcProfilePageInSidebarAndRemoveEditAndCopyCVInoldViewAndTheBetaChips = 41\n\nImportCv = 42\n\nAI = 43\n\nAITextGeneration = 44\n\nProjectPlanning = 48\n\nExternalAccounts = 50\n\nConvertAccount = 51\n\nUserProvisioning = 52\n\nWebhooks = 60\n\nGrowthPlan = 70\n\nGUIShowcase = 80\n\nIntercom = 600",
+        "description": "\n\nCompanyUserResume = 1\n\nCustomers = 2\n\nAssignments = 3\n\nPartners = 4\n\nOffers = 5\n\nReports = 6\n\nRecruitment = 8\n\nAbsence = 9\n\nApi = 10\n\nReferenceText = 11\n\nProfileCompleteness = 12\n\nCalendarSync = 13\n\nAllowWidgetModification = 14\n\nConfiguredFilters = 19\n\nSkillSets = 20\n\nProfileUpdateReminders = 21\n\nOverdueProjectReminders = 22\n\nEmailSync = 23\n\nApplicationRegistration = 30\n\nApplicationDirectory = 31\n\nNextGenResume = 40\n\nHideLinkToMvcProfilePageInSidebarAndRemoveEditAndCopyCVInoldViewAndTheBetaChips = 41\n\nImportCv = 42\n\nAI = 43\n\nAITextGeneration = 44\n\nProjectPlanning = 48\n\nExternalAccounts = 50\n\nConvertAccount = 51\n\nUserProvisioning = 52\n\nWebhooks = 60\n\nGrowthPlan = 70\n\nGUIShowcase = 80\n\nAppmixer = 90\n\nIntercom = 600",
         "format": "int32",
         "x-enumNames": [
           "CompanyUserResume",
@@ -51708,6 +51709,7 @@
           "Webhooks",
           "GrowthPlan",
           "GUIShowcase",
+          "Appmixer",
           "Intercom"
         ],
         "x-enum-varnames": [
@@ -51743,6 +51745,7 @@
           "Webhooks",
           "GrowthPlan",
           "GUIShowcase",
+          "Appmixer",
           "Intercom"
         ],
         "x-ms-enum": {
@@ -51875,6 +51878,10 @@
             {
               "name": "GUIShowcase",
               "value": 80
+            },
+            {
+              "name": "Appmixer",
+              "value": 90
             },
             {
               "name": "Intercom",

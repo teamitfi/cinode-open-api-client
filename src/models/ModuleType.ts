@@ -69,6 +69,8 @@
  *
  * GUIShowcase = 80
  *
+ * Appmixer = 90
+ *
  * Intercom = 600
  */
 export enum ModuleType {
@@ -104,5 +106,6 @@ export enum ModuleType {
     Webhooks = 60,
     GrowthPlan = 70,
     GUIShowcase = 80,
+    Appmixer = 90,
     Intercom = 600,
 }

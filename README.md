@@ -1,9 +1,15 @@
 # cinode-open-api-client
-A generated typescript client for the API of www.cinode.com, which uses parcel to create a multi target lib.
+A generated typescript client for the API of www.cinode.com, which creates multi usable target lib.
+
+## Update the client
+```
+npm run update-client
+
+```
 
 ## Generate the client
 ```
-npm run generate
+npm run generate-client
 
 ```
 
@@ -18,3 +24,8 @@ npm run build
 npm run watch
 
 ```
+
+
+# Thanks to:
+https://github.com/ferdikoomen/openapi-typescript-codegen/wiki/Basic-usage
+https://api.cinode.com/docs/index.html

@@ -6,7 +6,9 @@
       "module": "commonjs",
       "strict": true,
       "esModuleInterop": true,
-      "outDir": "./dist"
+      "outDir": "./dist",
+      "types": ["node"],
+      "lib": ["dom", "es2018"],
     },
     "include": ["src/**/*.ts"],
     "exclude": ["node_modules"]
