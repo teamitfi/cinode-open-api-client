@@ -3,7 +3,7 @@
       "isolatedModules": true,
       "experimentalDecorators": true,
       "target": "es2018", // or "es2015", "es2016", etc.
-      "module": "CommonJS",
+      "module": "commonjs",
       "strict": true,
       "esModuleInterop": true,
       "outDir": "./dist",
