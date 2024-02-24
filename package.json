@@ -3,8 +3,8 @@
   "version": "1.0.9",
   "description": "",
   "source": "src/index.ts",
-  "module": "dist/index.js",
   "types": "dist/types.d.ts",
+  "type": "module",
   "scripts": {
     "watch": "parcel watch",
     "build": "rimraf ./dist && parcel build",
