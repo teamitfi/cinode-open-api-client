@@ -6,11 +6,11 @@ downloadFile(
   "./cinode-swagger.json"
 )
   .then(() => console.log("File downloaded successfully"))
-  .catch((error: Error) =>
+  .catch((error) =>
     console.error(`Error downloading file: ${error.message}`)
   );
 
-async function downloadFile(url: string, dest: string): Promise<void> {
+async function downloadFile(url, dest){
   const response = await axios.get(url, { responseType: "stream" });
   const writer = fs.createWriteStream(dest);
 

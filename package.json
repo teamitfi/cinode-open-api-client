@@ -1,36 +1,38 @@
 {
   "name": "cinode-open-api-client",
   "version": "1.0.10",
-  "description": "",
-  "src": "src/index.ts",
   "main": "dist/index.js",
-  "output": "dist",
   "types": "dist/index.d.ts",
+  "description": "A typescript library for the API of www.cinode.com",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "generate-client": "openapi --name Cinode --client axios --input ./cinode-swagger.json --output ./src",
     "lint": "eslint --fix",
     "check": "tsc --noEmit",
-    "update-client": "npx ts-node download-file.ts",
-    "build": "rimraf dist && parcel build src/index.ts"
+    "update-client": "node download-file.mjs",
+    "build": "bun run build.mjs",
+    "prepublishOnly": "bun run build"
   },
-  "keywords": [],
+  "keywords": [
+    "bun"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@parcel/packager-ts": "^2.11.0",
-    "@parcel/transformer-typescript-tsc": "^2.11.0",
-    "@parcel/transformer-typescript-types": "^2.11.0",
     "@types/axios": "^0.14.0",
+    "@types/bun": "^1.0.0",
     "@types/node": "^20.11.20",
+    "bun": "^1.0.29",
+    "bun-plugin-dts": "^0.2.1",
     "eslint": "^8.57.0",
     "openapi-typescript-codegen": "^0.27.0",
-    "parcel": "^2.11.0",
-    "typescript": "^5.3.3",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "typescript": "^5.3.3"
   },
   "dependencies": {
-    "form-data": "^4.0.0",
-    "axios": "^1.6.7"
+    "axios": "^1.6.7",
+    "form-data": "^4.0.0"
   }
 }
-
