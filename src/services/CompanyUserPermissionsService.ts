@@ -5,9 +5,9 @@
 import type { CompanyUserPermissionsEditModel } from '../models/CompanyUserPermissionsEditModel';
 import type { RoleModel } from '../models/RoleModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyUserPermissionsService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Update Permissions for Company User
      * Requires access level: CompanyAdmin.
@@ -17,12 +17,12 @@ export class CompanyUserPermissionsService {
      * @returns RoleModel All went well
      * @throws ApiError
      */
-    public static updatePermissions(
+    public updatePermissions(
         companyId: number,
         companyUserId: number,
         requestBody?: CompanyUserPermissionsEditModel,
     ): CancelablePromise<Array<RoleModel>> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'PUT',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/permissions',
             path: {

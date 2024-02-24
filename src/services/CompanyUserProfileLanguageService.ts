@@ -6,9 +6,9 @@ import type { CompanyUserProfileLanguageAddModel } from '../models/CompanyUserPr
 import type { CompanyUserProfileLanguageEditModel } from '../models/CompanyUserProfileLanguageEditModel';
 import type { CompanyUserProfileLanguageModel } from '../models/CompanyUserProfileLanguageModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyUserProfileLanguageService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get profile language by id
      * @param companyId Company Id
@@ -17,12 +17,12 @@ export class CompanyUserProfileLanguageService {
      * @returns CompanyUserProfileLanguageModel All went well
      * @throws ApiError
      */
-    public static companyUserProfileLanguage(
+    public companyUserProfileLanguage(
         companyId: number,
         companyUserId: number,
         id: number,
     ): CancelablePromise<CompanyUserProfileLanguageModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/languages/{id}',
             path: {
@@ -48,13 +48,13 @@ export class CompanyUserProfileLanguageService {
      * @returns CompanyUserProfileLanguageModel All went well
      * @throws ApiError
      */
-    public static updateCompanyUserProfileLanguage(
+    public updateCompanyUserProfileLanguage(
         companyId: number,
         companyUserId: number,
         id: number,
         requestBody?: CompanyUserProfileLanguageEditModel,
     ): CancelablePromise<CompanyUserProfileLanguageModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'PUT',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/languages/{id}',
             path: {
@@ -81,12 +81,12 @@ export class CompanyUserProfileLanguageService {
      * @returns any All went well
      * @throws ApiError
      */
-    public static deleteCompanyUserProfileLanguage(
+    public deleteCompanyUserProfileLanguage(
         id: number,
         companyId: number,
         companyUserId: number,
     ): CancelablePromise<any> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/languages/{id}',
             path: {
@@ -110,12 +110,12 @@ export class CompanyUserProfileLanguageService {
      * @returns CompanyUserProfileLanguageModel Created
      * @throws ApiError
      */
-    public static newCompanyUserProfileLanguage(
+    public newCompanyUserProfileLanguage(
         companyId: number,
         companyUserId: number,
         requestBody?: CompanyUserProfileLanguageAddModel,
     ): CancelablePromise<any | CompanyUserProfileLanguageModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/languages',
             path: {

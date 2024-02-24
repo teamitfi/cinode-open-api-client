@@ -4,9 +4,9 @@
 /* eslint-disable */
 import type { CompanyUserSkillModel } from '../models/CompanyUserSkillModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyUserSkillService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get skill by id
      * @param companyId Company Id
@@ -15,12 +15,12 @@ export class CompanyUserSkillService {
      * @returns CompanyUserSkillModel All went well
      * @throws ApiError
      */
-    public static skill(
+    public skill(
         companyId: number,
         companyUserId: number,
         id: number,
     ): CancelablePromise<CompanyUserSkillModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/skills/{id}',
             path: {

@@ -5,9 +5,9 @@
 import type { CompanyCustomerAddressAddEditModel } from '../models/CompanyCustomerAddressAddEditModel';
 import type { CompanyCustomerAddressModel } from '../models/CompanyCustomerAddressModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyCustomerAddressService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get customer address by id
      * Requires access level: CompanyManager. Requires module: Customers.
@@ -17,12 +17,12 @@ export class CompanyCustomerAddressService {
      * @returns CompanyCustomerAddressModel All went well
      * @throws ApiError
      */
-    public static customerAddress(
+    public customerAddress(
         companyId: number,
         customerId: number,
         id: number,
     ): CancelablePromise<CompanyCustomerAddressModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/customers/{customerId}/addresses/{id}',
             path: {
@@ -48,13 +48,13 @@ export class CompanyCustomerAddressService {
      * @returns CompanyCustomerAddressModel All went well
      * @throws ApiError
      */
-    public static editCompanyCustomerAddress(
+    public editCompanyCustomerAddress(
         companyId: number,
         customerId: number,
         id: number,
         requestBody?: CompanyCustomerAddressAddEditModel,
     ): CancelablePromise<CompanyCustomerAddressModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'PUT',
             url: '/v0.1/companies/{companyId}/customers/{customerId}/addresses/{id}',
             path: {
@@ -80,12 +80,12 @@ export class CompanyCustomerAddressService {
      * @returns any All went well
      * @throws ApiError
      */
-    public static deleteCompanyCustomerAddress(
+    public deleteCompanyCustomerAddress(
         companyId: number,
         customerId: number,
         id: number,
     ): CancelablePromise<any> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/v0.1/companies/{companyId}/customers/{customerId}/addresses/{id}',
             path: {
@@ -109,12 +109,12 @@ export class CompanyCustomerAddressService {
      * @returns CompanyCustomerAddressModel All went well
      * @throws ApiError
      */
-    public static newCompanyCustomerAddress(
+    public newCompanyCustomerAddress(
         companyId: number,
         customerId: number,
         requestBody?: CompanyCustomerAddressAddEditModel,
     ): CancelablePromise<CompanyCustomerAddressModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/customers/{customerId}/addresses',
             path: {

@@ -4,9 +4,9 @@
 /* eslint-disable */
 import type { DynamicCompanyUserResumeModel } from '../models/DynamicCompanyUserResumeModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class DynamicCompanyUserResumeService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get resume by id
      * Requires module: CompanyUserResume.
@@ -16,12 +16,12 @@ export class DynamicCompanyUserResumeService {
      * @returns DynamicCompanyUserResumeModel All went well
      * @throws ApiError
      */
-    public static dynamicResume(
+    public dynamicResume(
         companyId: number,
         companyUserId: number,
         id: number,
     ): CancelablePromise<DynamicCompanyUserResumeModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/resumes/{id}/dynamic',
             path: {

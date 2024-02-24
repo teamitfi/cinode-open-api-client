@@ -5,9 +5,9 @@
 import type { CompanyCandidateEventTaskModel } from '../models/CompanyCandidateEventTaskModel';
 import type { EventTaskAddEditModel } from '../models/EventTaskAddEditModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyCandidateEventTaskService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get company candidates task event with specified id
      * Requires access level: CompanyRecruiter. Requires module: Recruitment.
@@ -17,12 +17,12 @@ export class CompanyCandidateEventTaskService {
      * @returns CompanyCandidateEventTaskModel All went well
      * @throws ApiError
      */
-    public static companyCandidateEventTask(
+    public companyCandidateEventTask(
         companyId: number,
         candidateId: number,
         id: string,
     ): CancelablePromise<CompanyCandidateEventTaskModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/candidates/{candidateId}/events/tasks/{id}',
             path: {
@@ -48,13 +48,13 @@ export class CompanyCandidateEventTaskService {
      * @returns CompanyCandidateEventTaskModel All went well
      * @throws ApiError
      */
-    public static updateCompanyCandidateEventTask(
+    public updateCompanyCandidateEventTask(
         companyId: number,
         candidateId: number,
         id: string,
         requestBody?: EventTaskAddEditModel,
     ): CancelablePromise<CompanyCandidateEventTaskModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'PUT',
             url: '/v0.1/companies/{companyId}/candidates/{candidateId}/events/tasks/{id}',
             path: {
@@ -80,12 +80,12 @@ export class CompanyCandidateEventTaskService {
      * @returns any All went well
      * @throws ApiError
      */
-    public static deleteCompanyCandidateEventTask(
+    public deleteCompanyCandidateEventTask(
         companyId: number,
         candidateId: number,
         id: string,
     ): CancelablePromise<any> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/v0.1/companies/{companyId}/candidates/{candidateId}/events/tasks/{id}',
             path: {
@@ -110,12 +110,12 @@ export class CompanyCandidateEventTaskService {
      * @returns CompanyCandidateEventTaskModel Created
      * @throws ApiError
      */
-    public static newCompanyCandidateEventTask(
+    public newCompanyCandidateEventTask(
         companyId: number,
         candidateId: number,
         requestBody?: EventTaskAddEditModel,
     ): CancelablePromise<any | CompanyCandidateEventTaskModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/candidates/{candidateId}/events/tasks',
             path: {

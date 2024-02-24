@@ -8,9 +8,9 @@ import type { CompanyUserFullModel } from '../models/CompanyUserFullModel';
 import type { CompanyUserModel } from '../models/CompanyUserModel';
 import type { JsonPatchDocument } from '../models/JsonPatchDocument';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyUserService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get company user by id
      * @param companyId Company Id
@@ -18,11 +18,11 @@ export class CompanyUserService {
      * @returns CompanyUserModel All went well
      * @throws ApiError
      */
-    public static user(
+    public user(
         companyId: number,
         id: number,
     ): CancelablePromise<CompanyUserModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/users/{id}',
             path: {
@@ -46,12 +46,12 @@ export class CompanyUserService {
      * @returns CompanyUserFullModel All went well
      * @throws ApiError
      */
-    public static updateCompanyUser(
+    public updateCompanyUser(
         companyId: number,
         id: number,
         requestBody?: CompanyUserEditModel,
     ): CancelablePromise<CompanyUserFullModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'PUT',
             url: '/v0.1/companies/{companyId}/users/{id}',
             path: {
@@ -76,12 +76,12 @@ export class CompanyUserService {
      * @returns CompanyUserFullModel All went well
      * @throws ApiError
      */
-    public static patchCompanyUser(
+    public patchCompanyUser(
         companyId: number,
         id: number,
         requestBody?: JsonPatchDocument,
     ): CancelablePromise<CompanyUserFullModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'PATCH',
             url: '/v0.1/companies/{companyId}/users/{id}',
             path: {
@@ -109,13 +109,13 @@ export class CompanyUserService {
      * @returns any All went well
      * @throws ApiError
      */
-    public static deleteCompanyUser(
+    public deleteCompanyUser(
         companyId: number,
         id: number,
         firstName?: string,
         lastName?: string,
     ): CancelablePromise<any> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/v0.1/companies/{companyId}/users/{id}',
             path: {
@@ -141,11 +141,11 @@ export class CompanyUserService {
      * @returns CompanyUserFullModel All went well
      * @throws ApiError
      */
-    public static addCompanyUser(
+    public addCompanyUser(
         companyId: number,
         requestBody?: CompanyUserAddModel,
     ): CancelablePromise<CompanyUserFullModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/users',
             path: {

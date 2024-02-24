@@ -3,9 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyCustomerFileAttachmentService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get customer file attachment by Id
      * Requires access level: CompanyManager. Requires module: Customers.
@@ -15,12 +15,12 @@ export class CompanyCustomerFileAttachmentService {
      * @returns string All went well
      * @throws ApiError
      */
-    public static getCustomerAttachment(
+    public getCustomerAttachment(
         id: number,
         companyId: number,
         attachmentId: string,
     ): CancelablePromise<string> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/customers/{id}/attachments/{attachmentId}',
             path: {

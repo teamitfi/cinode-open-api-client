@@ -4,9 +4,9 @@
 /* eslint-disable */
 import type { CompanyCustomerContactModel } from '../models/CompanyCustomerContactModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyCustomerContactsService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get customer contact list
      * Requires access level: CompanyManager. Requires module: Customers.
@@ -15,11 +15,11 @@ export class CompanyCustomerContactsService {
      * @returns CompanyCustomerContactModel All went well
      * @throws ApiError
      */
-    public static contacts(
+    public contacts(
         companyId: number,
         customerId: number,
     ): CancelablePromise<Array<CompanyCustomerContactModel>> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/customers/{customerId}/contacts',
             path: {

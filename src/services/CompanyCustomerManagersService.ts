@@ -5,9 +5,9 @@
 import type { CompanyCustomerManagerModel } from '../models/CompanyCustomerManagerModel';
 import type { CompanyCustomerManagersAddEditModel } from '../models/CompanyCustomerManagersAddEditModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyCustomerManagersService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get customer managers
      * Requires access level: CompanyManager. Requires module: Customers.
@@ -16,11 +16,11 @@ export class CompanyCustomerManagersService {
      * @returns CompanyCustomerManagerModel All went well
      * @throws ApiError
      */
-    public static companyCustomerManagers(
+    public companyCustomerManagers(
         companyId: number,
         customerId: number,
     ): CancelablePromise<Array<CompanyCustomerManagerModel>> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/customers/{customerId}/managers',
             path: {
@@ -52,12 +52,12 @@ export class CompanyCustomerManagersService {
              * @returns CompanyCustomerManagerModel All went well
              * @throws ApiError
              */
-            public static addCompanyCustomerResponsible(
+            public addCompanyCustomerResponsible(
                 companyId: number,
                 customerId: number,
                 requestBody?: CompanyCustomerManagersAddEditModel,
             ): CancelablePromise<Array<CompanyCustomerManagerModel>> {
-                return __request(OpenAPI, {
+                return this.httpRequest.request({
                     method: 'POST',
                     url: '/v0.1/companies/{companyId}/customers/{customerId}/managers',
                     path: {
@@ -86,12 +86,12 @@ export class CompanyCustomerManagersService {
              * @returns any All went well
              * @throws ApiError
              */
-            public static removeCustomerManager(
+            public removeCustomerManager(
                 companyId: number,
                 customerId: number,
                 id: number,
             ): CancelablePromise<any> {
-                return __request(OpenAPI, {
+                return this.httpRequest.request({
                     method: 'DELETE',
                     url: '/v0.1/companies/{companyId}/customers/{customerId}/managers/{id}',
                     path: {

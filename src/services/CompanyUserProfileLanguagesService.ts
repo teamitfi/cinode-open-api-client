@@ -4,16 +4,16 @@
 /* eslint-disable */
 import type { ProfileLanguageModel } from '../models/ProfileLanguageModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyUserProfileLanguagesService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get Available Profile Languages
      * @returns ProfileLanguageModel All went well
      * @throws ApiError
      */
-    public static profileLanguages(): CancelablePromise<Array<ProfileLanguageModel>> {
-        return __request(OpenAPI, {
+    public profileLanguages(): CancelablePromise<Array<ProfileLanguageModel>> {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/languages',
             errors: {

@@ -8,9 +8,9 @@ import type { ProjectAssignmentMemberSubcontractorAddModel } from '../models/Pro
 import type { ProjectAssignmentMemberSubcontractorEditModel } from '../models/ProjectAssignmentMemberSubcontractorEditModel';
 import type { ProjectAssignmentModel } from '../models/ProjectAssignmentModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class ProjectAssignmentMemberService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Add Role Member Employee
      * Requires access level: CompanyManager. Requires module: Assignments.
@@ -21,13 +21,13 @@ export class ProjectAssignmentMemberService {
      * @returns ProjectAssignmentModel All went well
      * @throws ApiError
      */
-    public static addProjectAssignmentMemberEmployee(
+    public addProjectAssignmentMemberEmployee(
         companyId: number,
         projectId: number,
         roleId: number,
         requestBody?: ProjectAssignmentMemberEmployeeAddModel,
     ): CancelablePromise<ProjectAssignmentModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/projects/{projectId}/roles/{roleId}/members/employee',
             path: {
@@ -54,13 +54,13 @@ export class ProjectAssignmentMemberService {
      * @returns ProjectAssignmentModel All went well
      * @throws ApiError
      */
-    public static addProjectAssignmentMemberSubcontractor(
+    public addProjectAssignmentMemberSubcontractor(
         companyId: number,
         projectId: number,
         roleId: number,
         requestBody?: ProjectAssignmentMemberSubcontractorAddModel,
     ): CancelablePromise<ProjectAssignmentModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/projects/{projectId}/roles/{roleId}/members/subcontractor',
             path: {
@@ -88,14 +88,14 @@ export class ProjectAssignmentMemberService {
      * @returns ProjectAssignmentModel All went well
      * @throws ApiError
      */
-    public static updateProjectAssignmentMemberEmployee(
+    public updateProjectAssignmentMemberEmployee(
         companyId: number,
         projectId: number,
         roleId: number,
         id: number,
         requestBody?: ProjectAssignmentMemberEmployeeEditModel,
     ): CancelablePromise<ProjectAssignmentModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'PUT',
             url: '/v0.1/companies/{companyId}/projects/{projectId}/roles/{roleId}/members/employee/{id}',
             path: {
@@ -124,14 +124,14 @@ export class ProjectAssignmentMemberService {
      * @returns ProjectAssignmentModel All went well
      * @throws ApiError
      */
-    public static updateProjectAssignmentMemberSubcontractor(
+    public updateProjectAssignmentMemberSubcontractor(
         companyId: number,
         projectId: number,
         roleId: number,
         id: number,
         requestBody?: ProjectAssignmentMemberSubcontractorEditModel,
     ): CancelablePromise<ProjectAssignmentModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'PUT',
             url: '/v0.1/companies/{companyId}/projects/{projectId}/roles/{roleId}/members/subcontractor/{id}',
             path: {
@@ -159,13 +159,13 @@ export class ProjectAssignmentMemberService {
      * @returns ProjectAssignmentModel All went well
      * @throws ApiError
      */
-    public static deleteProjectAssignmentMemberEmployee(
+    public deleteProjectAssignmentMemberEmployee(
         companyId: number,
         projectId: number,
         roleId: number,
         id: number,
     ): CancelablePromise<ProjectAssignmentModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/v0.1/companies/{companyId}/projects/{projectId}/roles/{roleId}/members/{id}',
             path: {

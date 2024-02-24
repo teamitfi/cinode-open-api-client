@@ -6,9 +6,9 @@ import type { CompanyUserProfileAddEditModel } from '../models/CompanyUserProfil
 import type { CompanyUserProfileBaseModel } from '../models/CompanyUserProfileBaseModel';
 import type { CompanyUserProfileFullModel } from '../models/CompanyUserProfileFullModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyUserProfileService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get profile by company user id
      * @param companyId Company Id
@@ -16,11 +16,11 @@ export class CompanyUserProfileService {
      * @returns CompanyUserProfileFullModel All went well
      * @throws ApiError
      */
-    public static companyUserProfile(
+    public companyUserProfile(
         companyId: number,
         companyUserId: number,
     ): CancelablePromise<CompanyUserProfileFullModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile',
             path: {
@@ -45,12 +45,12 @@ export class CompanyUserProfileService {
      * @returns CompanyUserProfileBaseModel Created
      * @throws ApiError
      */
-    public static newCompanyUserProfile(
+    public newCompanyUserProfile(
         companyId: number,
         companyUserId: number,
         requestBody?: CompanyUserProfileAddEditModel,
     ): CancelablePromise<any | CompanyUserProfileBaseModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile',
             path: {

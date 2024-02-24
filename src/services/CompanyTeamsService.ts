@@ -4,19 +4,19 @@
 /* eslint-disable */
 import type { TeamBaseModel } from '../models/TeamBaseModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyTeamsService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get teams list
      * @param companyId Company Id
      * @returns TeamBaseModel All went well
      * @throws ApiError
      */
-    public static companyTeams(
+    public companyTeams(
         companyId: number,
     ): CancelablePromise<Array<TeamBaseModel>> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/teams',
             path: {

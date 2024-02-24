@@ -4,9 +4,9 @@
 /* eslint-disable */
 import type { CompanyUserEventBaseModel } from '../models/CompanyUserEventBaseModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyUserSubcontractorEventsTasksService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get subcontractors tasks events list
      * Requires access level: PartnerManager. Requires module: Partners.
@@ -15,11 +15,11 @@ export class CompanyUserSubcontractorEventsTasksService {
      * @returns CompanyUserEventBaseModel All went well
      * @throws ApiError
      */
-    public static companyUserSubcontractorEventsTasks(
+    public companyUserSubcontractorEventsTasks(
         companyId: number,
         companyUserId: number,
     ): CancelablePromise<Array<CompanyUserEventBaseModel>> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/subcontractors/{companyUserId}/events/tasks',
             path: {

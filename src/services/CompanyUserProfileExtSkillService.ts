@@ -5,9 +5,9 @@
 import type { CompanyUserProfileExtSkillAddEditModel } from '../models/CompanyUserProfileExtSkillAddEditModel';
 import type { CompanyUserProfileExtSkillModel } from '../models/CompanyUserProfileExtSkillModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyUserProfileExtSkillService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get profile external skill by id
      * @param companyId Company Id
@@ -16,12 +16,12 @@ export class CompanyUserProfileExtSkillService {
      * @returns CompanyUserProfileExtSkillModel All went well
      * @throws ApiError
      */
-    public static companyUserProfileExtSkill(
+    public companyUserProfileExtSkill(
         companyId: number,
         companyUserId: number,
         id: number,
     ): CancelablePromise<CompanyUserProfileExtSkillModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/extskills/{id}',
             path: {
@@ -47,13 +47,13 @@ export class CompanyUserProfileExtSkillService {
      * @returns CompanyUserProfileExtSkillModel All went well
      * @throws ApiError
      */
-    public static updateCompanyUserProfileExtSkill(
+    public updateCompanyUserProfileExtSkill(
         companyId: number,
         companyUserId: number,
         id: number,
         requestBody?: CompanyUserProfileExtSkillAddEditModel,
     ): CancelablePromise<CompanyUserProfileExtSkillModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'PUT',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/extskills/{id}',
             path: {
@@ -80,12 +80,12 @@ export class CompanyUserProfileExtSkillService {
      * @returns any All went well
      * @throws ApiError
      */
-    public static deleteCompanyUserProfileExtSkill(
+    public deleteCompanyUserProfileExtSkill(
         id: number,
         companyId: number,
         companyUserId: number,
     ): CancelablePromise<any> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/extskills/{id}',
             path: {
@@ -109,12 +109,12 @@ export class CompanyUserProfileExtSkillService {
      * @returns CompanyUserProfileExtSkillModel Created
      * @throws ApiError
      */
-    public static newCompanyUserProfileExtSkill(
+    public newCompanyUserProfileExtSkill(
         companyId: number,
         companyUserId: number,
         requestBody?: CompanyUserProfileExtSkillAddEditModel,
     ): CancelablePromise<any | CompanyUserProfileExtSkillModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/extskills',
             path: {

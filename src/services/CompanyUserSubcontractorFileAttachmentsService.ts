@@ -4,9 +4,9 @@
 /* eslint-disable */
 import type { CompanyUserSubcontractorFileAttachmentListModel } from '../models/CompanyUserSubcontractorFileAttachmentListModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyUserSubcontractorFileAttachmentsService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Upload subcontractor file attachment
      * Requires access level: PartnerManager. Requires module: Partners.
@@ -16,7 +16,7 @@ export class CompanyUserSubcontractorFileAttachmentsService {
      * @returns CompanyUserSubcontractorFileAttachmentListModel Created
      * @throws ApiError
      */
-    public static subcontractorAttachment(
+    public subcontractorAttachment(
         id: number,
         companyId: number,
         formData?: {
@@ -25,7 +25,7 @@ export class CompanyUserSubcontractorFileAttachmentsService {
             Description?: string;
         },
     ): CancelablePromise<CompanyUserSubcontractorFileAttachmentListModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/subcontractors/{id}/attachments',
             path: {

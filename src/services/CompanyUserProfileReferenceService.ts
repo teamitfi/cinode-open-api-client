@@ -5,9 +5,9 @@
 import type { CompanyUserProfileReferenceAddEditModel } from '../models/CompanyUserProfileReferenceAddEditModel';
 import type { CompanyUserProfileReferenceModel } from '../models/CompanyUserProfileReferenceModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyUserProfileReferenceService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get profile reference by id
      * @param companyId Company Id
@@ -16,12 +16,12 @@ export class CompanyUserProfileReferenceService {
      * @returns CompanyUserProfileReferenceModel All went well
      * @throws ApiError
      */
-    public static companyUserProfileReference(
+    public companyUserProfileReference(
         companyId: number,
         companyUserId: number,
         id: number,
     ): CancelablePromise<CompanyUserProfileReferenceModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/references/{id}',
             path: {
@@ -47,13 +47,13 @@ export class CompanyUserProfileReferenceService {
      * @returns CompanyUserProfileReferenceModel All went well
      * @throws ApiError
      */
-    public static updateCompanyUserProfileReference(
+    public updateCompanyUserProfileReference(
         companyId: number,
         companyUserId: number,
         id: number,
         requestBody?: CompanyUserProfileReferenceAddEditModel,
     ): CancelablePromise<CompanyUserProfileReferenceModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'PUT',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/references/{id}',
             path: {
@@ -80,12 +80,12 @@ export class CompanyUserProfileReferenceService {
      * @returns any All went well
      * @throws ApiError
      */
-    public static deleteCompanyUserProfileReference(
+    public deleteCompanyUserProfileReference(
         id: number,
         companyId: number,
         companyUserId: number,
     ): CancelablePromise<any> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/references/{id}',
             path: {
@@ -109,12 +109,12 @@ export class CompanyUserProfileReferenceService {
      * @returns CompanyUserProfileReferenceModel Created
      * @throws ApiError
      */
-    public static newCompanyUserProfileReference(
+    public newCompanyUserProfileReference(
         companyId: number,
         companyUserId: number,
         requestBody?: CompanyUserProfileReferenceAddEditModel,
     ): CancelablePromise<any | CompanyUserProfileReferenceModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/references',
             path: {

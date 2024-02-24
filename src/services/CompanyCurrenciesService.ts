@@ -4,19 +4,19 @@
 /* eslint-disable */
 import type { CurrencyModel } from '../models/CurrencyModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyCurrenciesService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get company currencies
      * @param companyId Company Id
      * @returns CurrencyModel All went well
      * @throws ApiError
      */
-    public static companyCurrencies(
+    public companyCurrencies(
         companyId: number,
     ): CancelablePromise<Array<CurrencyModel>> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/currencies',
             path: {

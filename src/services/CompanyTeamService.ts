@@ -5,9 +5,9 @@
 import type { TeamAddEditModel } from '../models/TeamAddEditModel';
 import type { TeamModel } from '../models/TeamModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyTeamService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get team by id
      * @param companyId Company Id
@@ -15,11 +15,11 @@ export class CompanyTeamService {
      * @returns TeamModel All went well
      * @throws ApiError
      */
-    public static team(
+    public team(
         companyId: number,
         id: number,
     ): CancelablePromise<TeamModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/teams/{id}',
             path: {
@@ -43,12 +43,12 @@ export class CompanyTeamService {
      * @returns TeamModel All went well
      * @throws ApiError
      */
-    public static updateTeam(
+    public updateTeam(
         id: number,
         companyId: number,
         requestBody?: TeamAddEditModel,
     ): CancelablePromise<TeamModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'PUT',
             url: '/v0.1/companies/{companyId}/teams/{id}',
             path: {
@@ -72,11 +72,11 @@ export class CompanyTeamService {
      * @returns TeamModel All went well
      * @throws ApiError
      */
-    public static newTeam(
+    public newTeam(
         companyId: number,
         requestBody?: TeamAddEditModel,
     ): CancelablePromise<TeamModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/teams',
             path: {

@@ -5,9 +5,9 @@
 import type { SearchSkillQueryModel } from '../models/SearchSkillQueryModel';
 import type { SearchSkillResultModel } from '../models/SearchSkillResultModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class SkillSearchService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Search users by skill keyword id
      * @param companyId Company Id
@@ -15,11 +15,11 @@ export class SkillSearchService {
      * @returns SearchSkillResultModel All went well
      * @throws ApiError
      */
-    public static searchSkill(
+    public searchSkill(
         companyId: number,
         requestBody?: SearchSkillQueryModel,
     ): CancelablePromise<SearchSkillResultModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/skills/search',
             path: {

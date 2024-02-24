@@ -4,9 +4,9 @@
 /* eslint-disable */
 import type { CompanyUserFullModel } from '../models/CompanyUserFullModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyUserFullService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get company user, including financial fields, by id
      * Requires access level: CompanyAdmin.
@@ -15,11 +15,11 @@ export class CompanyUserFullService {
      * @returns CompanyUserFullModel All went well
      * @throws ApiError
      */
-    public static userFull(
+    public userFull(
         companyId: number,
         id: number,
     ): CancelablePromise<CompanyUserFullModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/users-full/{id}',
             path: {

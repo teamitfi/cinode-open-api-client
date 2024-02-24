@@ -5,9 +5,9 @@
 import type { WebhookAddModel } from '../models/WebhookAddModel';
 import type { WebhookModel } from '../models/WebhookModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyWebhookService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Add Webhook
      * Sample request:
@@ -35,11 +35,11 @@ export class CompanyWebhookService {
                          * @returns WebhookModel All went well
                          * @throws ApiError
                          */
-                        public static newWebhook(
+                        public newWebhook(
                             companyId: number,
                             requestBody?: WebhookAddModel,
                         ): CancelablePromise<WebhookModel> {
-                            return __request(OpenAPI, {
+                            return this.httpRequest.request({
                                 method: 'POST',
                                 url: '/v0.1/companies/{companyId}/webhooks',
                                 path: {
@@ -63,11 +63,11 @@ export class CompanyWebhookService {
                          * @returns WebhookModel Created
                          * @throws ApiError
                          */
-                        public static installWebhookManifest(
+                        public installWebhookManifest(
                             companyId: number,
                             requestBody?: Array<WebhookAddModel>,
                         ): CancelablePromise<Array<WebhookModel>> {
-                            return __request(OpenAPI, {
+                            return this.httpRequest.request({
                                 method: 'POST',
                                 url: '/v0.1/companies/{companyId}/webhooks/manifest',
                                 path: {
@@ -94,11 +94,11 @@ export class CompanyWebhookService {
                          * @returns any All went well
                          * @throws ApiError
                          */
-                        public static removeWebhook(
+                        public removeWebhook(
                             companyId: number,
                             id: string,
                         ): CancelablePromise<any> {
-                            return __request(OpenAPI, {
+                            return this.httpRequest.request({
                                 method: 'DELETE',
                                 url: '/v0.1/companies/{companyId}/webhooks/{id}',
                                 path: {

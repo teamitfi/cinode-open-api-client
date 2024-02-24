@@ -4,9 +4,9 @@
 /* eslint-disable */
 import type { CompanyTagBaseModel } from '../models/CompanyTagBaseModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyTagsService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get company tags
      * Sample request:
@@ -16,10 +16,10 @@ export class CompanyTagsService {
      * @returns CompanyTagBaseModel All went well
      * @throws ApiError
      */
-    public static companyTags(
+    public companyTags(
         companyId: number,
     ): CancelablePromise<Array<CompanyTagBaseModel>> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/tags',
             path: {

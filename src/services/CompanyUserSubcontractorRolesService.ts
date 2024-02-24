@@ -5,9 +5,9 @@
 import type { CompanyUserSubcontractorRoleMemberModel } from '../models/CompanyUserSubcontractorRoleMemberModel';
 import type { CompanyUserSubcontractorRolesModel } from '../models/CompanyUserSubcontractorRolesModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyUserSubcontractorRolesService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get assigned and prospect roles for subcontractor
      * Requires access level: CompanyManager. Requires module: Assignments.
@@ -16,11 +16,11 @@ export class CompanyUserSubcontractorRolesService {
      * @returns CompanyUserSubcontractorRolesModel All went well
      * @throws ApiError
      */
-    public static getSubcontractorRoles(
+    public getSubcontractorRoles(
         companyId: number,
         subcontractorId: number,
     ): CancelablePromise<CompanyUserSubcontractorRolesModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/subcontractors/{subcontractorId}/roles',
             path: {
@@ -44,12 +44,12 @@ export class CompanyUserSubcontractorRolesService {
      * @returns CompanyUserSubcontractorRoleMemberModel All went well
      * @throws ApiError
      */
-    public static getSubcontractorRole(
+    public getSubcontractorRole(
         companyId: number,
         subcontractorId: number,
         projectAssignmentId: number,
     ): CancelablePromise<CompanyUserSubcontractorRoleMemberModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/subcontractors/{subcontractorId}/roles/{projectAssignmentId}',
             path: {

@@ -4,9 +4,9 @@
 /* eslint-disable */
 import type { CompanyUserSubcontractorBaseModel } from '../models/CompanyUserSubcontractorBaseModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyUserSubcontractorsService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get subcontractors list
      * Requires access level: PartnerManager. Requires module: Partners.
@@ -14,10 +14,10 @@ export class CompanyUserSubcontractorsService {
      * @returns CompanyUserSubcontractorBaseModel All went well
      * @throws ApiError
      */
-    public static companyUserSubcontractors(
+    public companyUserSubcontractors(
         companyId: number,
     ): CancelablePromise<Array<CompanyUserSubcontractorBaseModel>> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/subcontractors',
             path: {

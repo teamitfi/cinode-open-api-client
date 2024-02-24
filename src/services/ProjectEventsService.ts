@@ -4,9 +4,9 @@
 /* eslint-disable */
 import type { ProjectEventBaseModel } from '../models/ProjectEventBaseModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class ProjectEventsService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get project events list
      * Requires access level: CompanyManager. Requires module: Assignments.
@@ -15,11 +15,11 @@ export class ProjectEventsService {
      * @returns ProjectEventBaseModel All went well
      * @throws ApiError
      */
-    public static projectEvents(
+    public projectEvents(
         companyId: number,
         projectId: number,
     ): CancelablePromise<Array<ProjectEventBaseModel>> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/projects/{projectId}/events',
             path: {

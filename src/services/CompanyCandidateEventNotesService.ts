@@ -4,9 +4,9 @@
 /* eslint-disable */
 import type { CompanyCandidateEventBaseModel } from '../models/CompanyCandidateEventBaseModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyCandidateEventNotesService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get company candidates events notes list
      * Requires access level: CompanyRecruiter. Requires module: Recruitment.
@@ -15,11 +15,11 @@ export class CompanyCandidateEventNotesService {
      * @returns CompanyCandidateEventBaseModel All went well
      * @throws ApiError
      */
-    public static companyCandidateNoteEventList(
+    public companyCandidateNoteEventList(
         companyId: number,
         candidateId: number,
     ): CancelablePromise<Array<CompanyCandidateEventBaseModel>> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/candidates/{candidateId}/events/notes',
             path: {

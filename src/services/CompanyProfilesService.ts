@@ -5,9 +5,9 @@
 import type { CompanyProfileFilterModel } from '../models/CompanyProfileFilterModel';
 import type { CompanyProfilesModel } from '../models/CompanyProfilesModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyProfilesService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get profiles list
      * Sample request:
@@ -28,11 +28,11 @@ export class CompanyProfilesService {
              * @returns CompanyProfilesModel All went well
              * @throws ApiError
              */
-            public static companyProfiles(
+            public companyProfiles(
                 companyId: number,
                 requestBody?: CompanyProfileFilterModel,
             ): CancelablePromise<CompanyProfilesModel> {
-                return __request(OpenAPI, {
+                return this.httpRequest.request({
                     method: 'POST',
                     url: '/v0.1/companies/{companyId}/profiles',
                     path: {

@@ -5,9 +5,9 @@
 import type { CustomerEventTaskAddEditModel } from '../models/CustomerEventTaskAddEditModel';
 import type { CustomerEventTaskModel } from '../models/CustomerEventTaskModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyCustomerEventsTaskService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get customer event task by id
      * Requires access level: CompanyManager. Requires module: Customers.
@@ -17,12 +17,12 @@ export class CompanyCustomerEventsTaskService {
      * @returns CustomerEventTaskModel All went well
      * @throws ApiError
      */
-    public static companyCustomerEventTask(
+    public companyCustomerEventTask(
         companyId: number,
         customerId: number,
         id: string,
     ): CancelablePromise<CustomerEventTaskModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/customers/{customerId}/events/tasks/{id}',
             path: {
@@ -48,13 +48,13 @@ export class CompanyCustomerEventsTaskService {
      * @returns CustomerEventTaskModel All went well
      * @throws ApiError
      */
-    public static updateTask(
+    public updateTask(
         companyId: number,
         customerId: number,
         id: string,
         requestBody?: CustomerEventTaskAddEditModel,
     ): CancelablePromise<CustomerEventTaskModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'PUT',
             url: '/v0.1/companies/{companyId}/customers/{customerId}/events/tasks/{id}',
             path: {
@@ -80,12 +80,12 @@ export class CompanyCustomerEventsTaskService {
      * @returns any All went well
      * @throws ApiError
      */
-    public static deleteTask(
+    public deleteTask(
         companyId: number,
         customerId: number,
         id: string,
     ): CancelablePromise<any> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/v0.1/companies/{companyId}/customers/{customerId}/events/tasks/{id}',
             path: {
@@ -109,12 +109,12 @@ export class CompanyCustomerEventsTaskService {
      * @returns CustomerEventTaskModel All went well
      * @throws ApiError
      */
-    public static newTask(
+    public newTask(
         companyId: number,
         customerId: number,
         requestBody?: CustomerEventTaskAddEditModel,
     ): CancelablePromise<CustomerEventTaskModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/customers/{customerId}/events/tasks',
             path: {

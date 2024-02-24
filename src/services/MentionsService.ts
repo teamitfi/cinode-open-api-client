@@ -4,9 +4,9 @@
 /* eslint-disable */
 import type { MentionTextModel } from '../models/MentionTextModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class MentionsService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Translates any mention-ids in a text to their human readable form.
      * Translations are access restricted, if you don't have enough access
@@ -16,11 +16,11 @@ export class MentionsService {
      * @returns string All went well
      * @throws ApiError
      */
-    public static translateMentions(
+    public translateMentions(
         companyId: number,
         requestBody?: MentionTextModel,
     ): CancelablePromise<string> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/mentions/to-natural-text',
             path: {

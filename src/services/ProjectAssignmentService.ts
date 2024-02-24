@@ -8,9 +8,9 @@ import type { ProjectAssignmentAnnounceModel } from '../models/ProjectAssignment
 import type { ProjectAssignmentEditModel } from '../models/ProjectAssignmentEditModel';
 import type { ProjectAssignmentModel } from '../models/ProjectAssignmentModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class ProjectAssignmentService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * @deprecated
      * Get projectassignment by id (Obsolete)
@@ -21,12 +21,12 @@ export class ProjectAssignmentService {
      * @returns ProjectAssignmentModel All went well
      * @throws ApiError
      */
-    public static oldProjectAssignment(
+    public oldProjectAssignment(
         companyId: number,
         projectId: number,
         id: number,
     ): CancelablePromise<ProjectAssignmentModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/projects/{projectId}/projectassignments/{id}',
             path: {
@@ -51,12 +51,12 @@ export class ProjectAssignmentService {
      * @returns ProjectAssignmentModel All went well
      * @throws ApiError
      */
-    public static projectAssignment(
+    public projectAssignment(
         companyId: number,
         projectId: number,
         id: number,
     ): CancelablePromise<ProjectAssignmentModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/projects/{projectId}/roles/{id}',
             path: {
@@ -82,13 +82,13 @@ export class ProjectAssignmentService {
      * @returns ProjectAssignmentModel All went well
      * @throws ApiError
      */
-    public static updateProjectAssignment(
+    public updateProjectAssignment(
         companyId: number,
         projectId: number,
         id: number,
         requestBody?: ProjectAssignmentEditModel,
     ): CancelablePromise<ProjectAssignmentModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'PUT',
             url: '/v0.1/companies/{companyId}/projects/{projectId}/roles/{id}',
             path: {
@@ -114,12 +114,12 @@ export class ProjectAssignmentService {
      * @returns ProjectAssignmentModel All went well
      * @throws ApiError
      */
-    public static deleteProjectAssignment(
+    public deleteProjectAssignment(
         companyId: number,
         projectId: number,
         id: number,
     ): CancelablePromise<ProjectAssignmentModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/v0.1/companies/{companyId}/projects/{projectId}/roles/{id}',
             path: {
@@ -143,12 +143,12 @@ export class ProjectAssignmentService {
      * @returns ProjectAssignmentModel All went well
      * @throws ApiError
      */
-    public static newProjectAssignment(
+    public newProjectAssignment(
         companyId: number,
         projectId: number,
         requestBody?: ProjectAssignmentAddModel,
     ): CancelablePromise<ProjectAssignmentModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/projects/{projectId}/roles',
             path: {
@@ -176,13 +176,13 @@ export class ProjectAssignmentService {
      * @returns any All went well
      * @throws ApiError
      */
-    public static announceProjectAssignment(
+    public announceProjectAssignment(
         projectId: number,
         projectAssignmentId: number,
         companyId: string,
         requestBody?: ProjectAssignmentAnnounceModel,
     ): CancelablePromise<ProjectAssignmentAnnouncementBaseModel | any> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/projects/{projectId}/roles/{projectAssignmentId}/announce',
             path: {

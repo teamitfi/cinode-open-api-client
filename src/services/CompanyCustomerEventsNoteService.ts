@@ -5,9 +5,9 @@
 import type { CustomerEventNoteAddEditModel } from '../models/CustomerEventNoteAddEditModel';
 import type { CustomerEventNoteModel } from '../models/CustomerEventNoteModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyCustomerEventsNoteService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get customer event note by id
      * Requires access level: CompanyManager. Requires module: Customers.
@@ -17,12 +17,12 @@ export class CompanyCustomerEventsNoteService {
      * @returns CustomerEventNoteModel All went well
      * @throws ApiError
      */
-    public static companyCustomerEventNote(
+    public companyCustomerEventNote(
         companyId: number,
         customerId: number,
         id: string,
     ): CancelablePromise<CustomerEventNoteModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/customers/{customerId}/events/notes/{id}',
             path: {
@@ -48,13 +48,13 @@ export class CompanyCustomerEventsNoteService {
      * @returns CustomerEventNoteModel All went well
      * @throws ApiError
      */
-    public static updateNote(
+    public updateNote(
         companyId: number,
         customerId: number,
         id: string,
         requestBody?: CustomerEventNoteAddEditModel,
     ): CancelablePromise<CustomerEventNoteModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'PUT',
             url: '/v0.1/companies/{companyId}/customers/{customerId}/events/notes/{id}',
             path: {
@@ -80,12 +80,12 @@ export class CompanyCustomerEventsNoteService {
      * @returns any All went well
      * @throws ApiError
      */
-    public static deleteNote(
+    public deleteNote(
         companyId: number,
         customerId: number,
         id: string,
     ): CancelablePromise<any> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/v0.1/companies/{companyId}/customers/{customerId}/events/notes/{id}',
             path: {
@@ -109,12 +109,12 @@ export class CompanyCustomerEventsNoteService {
      * @returns CustomerEventNoteModel All went well
      * @throws ApiError
      */
-    public static newNote(
+    public newNote(
         companyId: number,
         customerId: number,
         requestBody?: CustomerEventNoteAddEditModel,
     ): CancelablePromise<CustomerEventNoteModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/customers/{customerId}/events/notes',
             path: {

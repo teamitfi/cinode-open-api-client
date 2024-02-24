@@ -4,9 +4,9 @@
 /* eslint-disable */
 import type { CompanyTagModel } from '../models/CompanyTagModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyCustomerContactTagsService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Edit Tags for CustomerContact
      * Note:
@@ -34,13 +34,13 @@ export class CompanyCustomerContactTagsService {
                  * @returns CompanyTagModel All went well
                  * @throws ApiError
                  */
-                public static editCustomerContactTags(
+                public editCustomerContactTags(
                     companyId: number,
                     customerId: number,
                     contactId: number,
                     requestBody?: Array<CompanyTagModel>,
                 ): CancelablePromise<Array<CompanyTagModel>> {
-                    return __request(OpenAPI, {
+                    return this.httpRequest.request({
                         method: 'POST',
                         url: '/v0.1/companies/{companyId}/customers/{customerId}/contacts/{contactId}/tags',
                         path: {

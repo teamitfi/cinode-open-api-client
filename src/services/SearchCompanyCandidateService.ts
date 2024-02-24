@@ -5,9 +5,9 @@
 import type { SearchCompanyCandidateQueryModel } from '../models/SearchCompanyCandidateQueryModel';
 import type { SearchCompanyCandidateResultModel } from '../models/SearchCompanyCandidateResultModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class SearchCompanyCandidateService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get company candidates list from search criteria
      * Sample request:
@@ -33,11 +33,11 @@ export class SearchCompanyCandidateService {
              * @returns SearchCompanyCandidateResultModel All went well
              * @throws ApiError
              */
-            public static searchCompanyCandidate(
+            public searchCompanyCandidate(
                 companyId: number,
                 requestBody?: SearchCompanyCandidateQueryModel,
             ): CancelablePromise<SearchCompanyCandidateResultModel> {
-                return __request(OpenAPI, {
+                return this.httpRequest.request({
                     method: 'POST',
                     url: '/v0.1/companies/{companyId}/candidates/search',
                     path: {

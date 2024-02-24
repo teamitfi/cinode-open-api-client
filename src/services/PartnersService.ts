@@ -5,9 +5,9 @@
 import type { PartnersFilterModel } from '../models/PartnersFilterModel';
 import type { PartnersOverviewModel } from '../models/PartnersOverviewModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class PartnersService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get Partners by filter
      * Requires access level: PartnerManager. Requires module: Partners.
@@ -16,11 +16,11 @@ export class PartnersService {
      * @returns PartnersOverviewModel All went well
      * @throws ApiError
      */
-    public static searchPartners(
+    public searchPartners(
         companyId: number,
         requestBody?: PartnersFilterModel,
     ): CancelablePromise<PartnersOverviewModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/partners',
             path: {

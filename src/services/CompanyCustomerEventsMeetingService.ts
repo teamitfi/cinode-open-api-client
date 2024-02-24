@@ -5,9 +5,9 @@
 import type { CustomerEventMeetingAddEditModel } from '../models/CustomerEventMeetingAddEditModel';
 import type { CustomerEventMeetingModel } from '../models/CustomerEventMeetingModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyCustomerEventsMeetingService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get customer event meeting by id
      * Requires access level: CompanyManager. Requires module: Customers.
@@ -17,12 +17,12 @@ export class CompanyCustomerEventsMeetingService {
      * @returns CustomerEventMeetingModel All went well
      * @throws ApiError
      */
-    public static companyCustomerEventMeeting(
+    public companyCustomerEventMeeting(
         companyId: number,
         customerId: number,
         id: string,
     ): CancelablePromise<CustomerEventMeetingModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/customers/{customerId}/events/meetings/{id}',
             path: {
@@ -48,13 +48,13 @@ export class CompanyCustomerEventsMeetingService {
      * @returns CustomerEventMeetingModel All went well
      * @throws ApiError
      */
-    public static updateMeeting(
+    public updateMeeting(
         companyId: number,
         customerId: number,
         id: string,
         requestBody?: CustomerEventMeetingAddEditModel,
     ): CancelablePromise<CustomerEventMeetingModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'PUT',
             url: '/v0.1/companies/{companyId}/customers/{customerId}/events/meetings/{id}',
             path: {
@@ -80,12 +80,12 @@ export class CompanyCustomerEventsMeetingService {
      * @returns any All went well
      * @throws ApiError
      */
-    public static deleteMeeting(
+    public deleteMeeting(
         companyId: number,
         customerId: number,
         id: string,
     ): CancelablePromise<any> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/v0.1/companies/{companyId}/customers/{customerId}/events/meetings/{id}',
             path: {
@@ -109,12 +109,12 @@ export class CompanyCustomerEventsMeetingService {
      * @returns CustomerEventMeetingModel All went well
      * @throws ApiError
      */
-    public static newMeeting(
+    public newMeeting(
         companyId: number,
         customerId: number,
         requestBody?: CustomerEventMeetingAddEditModel,
     ): CancelablePromise<CustomerEventMeetingModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/customers/{customerId}/events/meetings',
             path: {

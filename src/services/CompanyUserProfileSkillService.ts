@@ -6,9 +6,9 @@ import type { CompanyUserProfileSkillAddModel } from '../models/CompanyUserProfi
 import type { CompanyUserProfileSkillEditModel } from '../models/CompanyUserProfileSkillEditModel';
 import type { CompanyUserProfileSkillModel } from '../models/CompanyUserProfileSkillModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyUserProfileSkillService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get profile skill by id
      * @param companyId Company Id
@@ -17,12 +17,12 @@ export class CompanyUserProfileSkillService {
      * @returns CompanyUserProfileSkillModel All went well
      * @throws ApiError
      */
-    public static companyUserProfileSkill(
+    public companyUserProfileSkill(
         companyId: number,
         companyUserId: number,
         id: number,
     ): CancelablePromise<CompanyUserProfileSkillModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/skills/{id}',
             path: {
@@ -48,13 +48,13 @@ export class CompanyUserProfileSkillService {
      * @returns CompanyUserProfileSkillModel All went well
      * @throws ApiError
      */
-    public static updateCompanyUserProfileSkill(
+    public updateCompanyUserProfileSkill(
         companyId: number,
         companyUserId: number,
         id: number,
         requestBody?: CompanyUserProfileSkillEditModel,
     ): CancelablePromise<CompanyUserProfileSkillModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'PUT',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/skills/{id}',
             path: {
@@ -81,12 +81,12 @@ export class CompanyUserProfileSkillService {
      * @returns any All went well
      * @throws ApiError
      */
-    public static deleteCompanyUserProfileSkill(
+    public deleteCompanyUserProfileSkill(
         id: number,
         companyId: number,
         companyUserId: number,
     ): CancelablePromise<any> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/skills/{id}',
             path: {
@@ -110,12 +110,12 @@ export class CompanyUserProfileSkillService {
      * @returns CompanyUserProfileSkillModel Created
      * @throws ApiError
      */
-    public static newCompanyUserProfileSkill(
+    public newCompanyUserProfileSkill(
         companyId: number,
         companyUserId: number,
         requestBody?: CompanyUserProfileSkillAddModel,
     ): CancelablePromise<any | CompanyUserProfileSkillModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/skills',
             path: {

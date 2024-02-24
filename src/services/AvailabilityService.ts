@@ -5,9 +5,9 @@
 import type { AvailabilityFilterModel } from '../models/AvailabilityFilterModel';
 import type { AvailabilityModel } from '../models/AvailabilityModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class AvailabilityService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get availability for company users. Omitting companyUserId gets availability for all company users in company.
      * @param companyId Your Cinode Company id
@@ -15,11 +15,11 @@ export class AvailabilityService {
      * @returns AvailabilityModel All went well
      * @throws ApiError
      */
-    public static searchAvailability(
+    public searchAvailability(
         companyId: number,
         requestBody?: AvailabilityFilterModel,
     ): CancelablePromise<Array<AvailabilityModel>> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/availability',
             path: {

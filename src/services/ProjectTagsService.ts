@@ -5,9 +5,9 @@
 import type { CompanyTagModel } from '../models/CompanyTagModel';
 import type { ProjectModel } from '../models/ProjectModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class ProjectTagsService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Edit Tags for Project
      * Note:
@@ -34,12 +34,12 @@ export class ProjectTagsService {
                  * @returns ProjectModel All went well
                  * @throws ApiError
                  */
-                public static editProjectTags(
+                public editProjectTags(
                     companyId: number,
                     projectId: number,
                     requestBody?: Array<CompanyTagModel>,
                 ): CancelablePromise<ProjectModel> {
-                    return __request(OpenAPI, {
+                    return this.httpRequest.request({
                         method: 'POST',
                         url: '/v0.1/companies/{companyId}/projects/{projectId}/tags',
                         path: {

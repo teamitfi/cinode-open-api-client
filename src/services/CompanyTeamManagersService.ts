@@ -6,9 +6,9 @@ import type { CompanyUserExtendedModel } from '../models/CompanyUserExtendedMode
 import type { TeamManagerEditModel } from '../models/TeamManagerEditModel';
 import type { TeamManagerModel } from '../models/TeamManagerModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyTeamManagersService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get team managers
      * @param companyId Company Id
@@ -16,11 +16,11 @@ export class CompanyTeamManagersService {
      * @returns CompanyUserExtendedModel All went well
      * @throws ApiError
      */
-    public static teamManagers(
+    public teamManagers(
         companyId: number,
         teamId: number,
     ): CancelablePromise<Array<CompanyUserExtendedModel>> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/teams/{teamId}/managers',
             path: {
@@ -49,12 +49,12 @@ export class CompanyTeamManagersService {
          * @returns TeamManagerModel All went well
          * @throws ApiError
          */
-        public static addTeamManager(
+        public addTeamManager(
             companyId: number,
             teamId: string,
             requestBody?: TeamManagerEditModel,
         ): CancelablePromise<Array<TeamManagerModel>> {
-            return __request(OpenAPI, {
+            return this.httpRequest.request({
                 method: 'POST',
                 url: '/v0.1/companies/{companyId}/teams/{teamId}/managers',
                 path: {
@@ -81,12 +81,12 @@ export class CompanyTeamManagersService {
          * @returns any All went well
          * @throws ApiError
          */
-        public static removeTeamManager(
+        public removeTeamManager(
             companyId: number,
             teamId: number,
             id: number,
         ): CancelablePromise<any> {
-            return __request(OpenAPI, {
+            return this.httpRequest.request({
                 method: 'DELETE',
                 url: '/v0.1/companies/{companyId}/teams/{teamId}/managers/{id}',
                 path: {

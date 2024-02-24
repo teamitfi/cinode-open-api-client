@@ -5,9 +5,9 @@
 import type { CompanyCandidateUriAttachmentAddModel } from '../models/CompanyCandidateUriAttachmentAddModel';
 import type { CompanyCandidateUriAttachmentModel } from '../models/CompanyCandidateUriAttachmentModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyCandidateUriAttachmentService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Add Candidate Uri (Link)
      * Requires access level: CompanyRecruiter. Requires module: Recruitment.
@@ -17,12 +17,12 @@ export class CompanyCandidateUriAttachmentService {
      * @returns CompanyCandidateUriAttachmentModel Created
      * @throws ApiError
      */
-    public static candidateUriAttachment(
+    public candidateUriAttachment(
         id: number,
         companyId: number,
         requestBody?: CompanyCandidateUriAttachmentAddModel,
     ): CancelablePromise<CompanyCandidateUriAttachmentModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/candidates/{id}/uriattachments',
             path: {
@@ -47,12 +47,12 @@ export class CompanyCandidateUriAttachmentService {
      * @returns any Success
      * @throws ApiError
      */
-    public static deleteCandidateUriAttachment(
+    public deleteCandidateUriAttachment(
         id: number,
         companyId: number,
         attachmentId: string,
     ): CancelablePromise<any> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/v0.1/companies/{companyId}/candidates/{id}/uriattachments/{attachmentId}',
             path: {

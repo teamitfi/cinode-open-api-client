@@ -5,9 +5,9 @@
 import type { SearchCompanyCustomerContactQueryModel } from '../models/SearchCompanyCustomerContactQueryModel';
 import type { SearchCompanyCustomerContactResultModel } from '../models/SearchCompanyCustomerContactResultModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class SearchCompanyCustomerContactService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get company customer contacts list from search criteria
      * Requires access level: CompanyManager. Requires module: Customers.
@@ -16,11 +16,11 @@ export class SearchCompanyCustomerContactService {
      * @returns SearchCompanyCustomerContactResultModel All went well
      * @throws ApiError
      */
-    public static searchCompanyCustomerContact(
+    public searchCompanyCustomerContact(
         companyId: number,
         requestBody?: SearchCompanyCustomerContactQueryModel,
     ): CancelablePromise<SearchCompanyCustomerContactResultModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/customers/contacts/search',
             path: {

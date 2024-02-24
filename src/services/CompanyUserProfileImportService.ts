@@ -4,9 +4,9 @@
 /* eslint-disable */
 import type { ImportProfileAsyncOperation } from '../models/ImportProfileAsyncOperation';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyUserProfileImportService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Create new profile import for a user.
      * This will start an async operation.
@@ -18,7 +18,7 @@ export class CompanyUserProfileImportService {
      * @returns any Accepted
      * @throws ApiError
      */
-    public static createCompanyUserProfileImport(
+    public createCompanyUserProfileImport(
         companyId: number,
         companyUserId: number,
         formData?: {
@@ -26,7 +26,7 @@ export class CompanyUserProfileImportService {
             MapSkillExperienceYearsToLevel?: boolean;
         },
     ): CancelablePromise<any> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/import',
             path: {
@@ -56,12 +56,12 @@ export class CompanyUserProfileImportService {
      * @returns any Accepted
      * @throws ApiError
      */
-    public static getCompanyUserProfileImport(
+    public getCompanyUserProfileImport(
         companyId: number,
         companyUserId: number,
         operationId: number,
     ): CancelablePromise<ImportProfileAsyncOperation | any> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/import/{operationId}',
             path: {

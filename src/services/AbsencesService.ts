@@ -4,9 +4,9 @@
 /* eslint-disable */
 import type { AbsencePeriodDtoModel } from '../models/AbsencePeriodDtoModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class AbsencesService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get absence period by company user id
      * @param companyId Your Cinode Company id
@@ -14,11 +14,11 @@ export class AbsencesService {
      * @returns AbsencePeriodDtoModel All went well
      * @throws ApiError
      */
-    public static absences(
+    public absences(
         companyId: number,
         companyUserId: number,
     ): CancelablePromise<Array<AbsencePeriodDtoModel>> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/absences',
             path: {

@@ -8,9 +8,9 @@ import type { CompanyCustomerEditModel } from '../models/CompanyCustomerEditMode
 import type { CompanyCustomerModel } from '../models/CompanyCustomerModel';
 import type { JsonPatchDocument } from '../models/JsonPatchDocument';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyCustomerService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get company customer by id
      * Requires access level: CompanyManager. Requires module: Customers.
@@ -19,11 +19,11 @@ export class CompanyCustomerService {
      * @returns CompanyCustomerModel All went well
      * @throws ApiError
      */
-    public static getCompanyCustomer(
+    public getCompanyCustomer(
         companyId: number,
         id: number,
     ): CancelablePromise<CompanyCustomerModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/customers/{id}',
             path: {
@@ -47,12 +47,12 @@ export class CompanyCustomerService {
      * @returns CompanyCustomerModel All went well
      * @throws ApiError
      */
-    public static updateCompanyCustomer(
+    public updateCompanyCustomer(
         id: number,
         companyId: number,
         requestBody?: CompanyCustomerEditModel,
     ): CancelablePromise<CompanyCustomerModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'PUT',
             url: '/v0.1/companies/{companyId}/customers/{id}',
             path: {
@@ -77,12 +77,12 @@ export class CompanyCustomerService {
      * @returns CompanyCustomerModel All went well
      * @throws ApiError
      */
-    public static patchCompanyCustomer(
+    public patchCompanyCustomer(
         id: number,
         companyId: number,
         requestBody?: JsonPatchDocument,
     ): CancelablePromise<CompanyCustomerModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'PATCH',
             url: '/v0.1/companies/{companyId}/customers/{id}',
             path: {
@@ -107,12 +107,12 @@ export class CompanyCustomerService {
      * @returns any All went well
      * @throws ApiError
      */
-    public static deleteCompanyCustomer(
+    public deleteCompanyCustomer(
         id: number,
         companyId: number,
         requestBody?: CompanyCustomerDeleteModel,
     ): CancelablePromise<any> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/v0.1/companies/{companyId}/customers/{id}',
             path: {
@@ -136,11 +136,11 @@ export class CompanyCustomerService {
      * @returns CompanyCustomerModel All went well
      * @throws ApiError
      */
-    public static newCompanyCustomer(
+    public newCompanyCustomer(
         companyId: number,
         requestBody?: CompanyCustomerAddModel,
     ): CancelablePromise<CompanyCustomerModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/customers',
             path: {

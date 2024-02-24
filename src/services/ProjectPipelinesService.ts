@@ -4,9 +4,9 @@
 /* eslint-disable */
 import type { ProjectPipelineModel } from '../models/ProjectPipelineModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class ProjectPipelinesService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get project pipelines
      * Requires access level: CompanyManager. Requires module: Assignments.
@@ -14,10 +14,10 @@ export class ProjectPipelinesService {
      * @returns ProjectPipelineModel All went well
      * @throws ApiError
      */
-    public static projectPipelines(
+    public projectPipelines(
         companyId: number,
     ): CancelablePromise<Array<ProjectPipelineModel>> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/projects/pipelines',
             path: {

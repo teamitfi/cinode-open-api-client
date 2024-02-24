@@ -5,9 +5,9 @@
 import type { CompanyUserProfileEmployerAddEditModel } from '../models/CompanyUserProfileEmployerAddEditModel';
 import type { CompanyUserProfileEmployerModel } from '../models/CompanyUserProfileEmployerModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyUserProfileEmployerService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get profile employer by id
      * @param companyId Company Id
@@ -16,12 +16,12 @@ export class CompanyUserProfileEmployerService {
      * @returns CompanyUserProfileEmployerModel All went well
      * @throws ApiError
      */
-    public static companyUserProfileEmployer(
+    public companyUserProfileEmployer(
         companyId: number,
         companyUserId: number,
         id: number,
     ): CancelablePromise<CompanyUserProfileEmployerModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/employers/{id}',
             path: {
@@ -47,13 +47,13 @@ export class CompanyUserProfileEmployerService {
      * @returns CompanyUserProfileEmployerModel All went well
      * @throws ApiError
      */
-    public static updateCompanyUserProfileEmployer(
+    public updateCompanyUserProfileEmployer(
         companyId: number,
         companyUserId: number,
         id: number,
         requestBody?: CompanyUserProfileEmployerAddEditModel,
     ): CancelablePromise<CompanyUserProfileEmployerModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'PUT',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/employers/{id}',
             path: {
@@ -80,12 +80,12 @@ export class CompanyUserProfileEmployerService {
      * @returns any All went well
      * @throws ApiError
      */
-    public static deleteCompanyUserProfileEmployer(
+    public deleteCompanyUserProfileEmployer(
         id: number,
         companyId: number,
         companyUserId: number,
     ): CancelablePromise<any> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/employers/{id}',
             path: {
@@ -109,12 +109,12 @@ export class CompanyUserProfileEmployerService {
      * @returns CompanyUserProfileEmployerModel Created
      * @throws ApiError
      */
-    public static newCompanyUserProfileEmployer(
+    public newCompanyUserProfileEmployer(
         companyId: number,
         companyUserId: number,
         requestBody?: CompanyUserProfileEmployerAddEditModel,
     ): CancelablePromise<any | CompanyUserProfileEmployerModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/employers',
             path: {

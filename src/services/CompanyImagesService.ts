@@ -4,9 +4,9 @@
 /* eslint-disable */
 import type { CompanyImageModel } from '../models/CompanyImageModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyImagesService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get Company Images Assigned to User
      * @param companyId Company Id
@@ -14,11 +14,11 @@ export class CompanyImagesService {
      * @returns CompanyImageModel All went well
      * @throws ApiError
      */
-    public static companyImages(
+    public companyImages(
         companyId: number,
         id: number,
     ): CancelablePromise<Array<CompanyImageModel>> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/users/{id}/images',
             path: {
@@ -40,7 +40,7 @@ export class CompanyImagesService {
      * @returns CompanyImageModel All went well
      * @throws ApiError
      */
-    public static addCompanyImage(
+    public addCompanyImage(
         companyId: number,
         id: number,
         formData?: {
@@ -48,7 +48,7 @@ export class CompanyImagesService {
             SetAsPrimary?: boolean;
         },
     ): CancelablePromise<CompanyImageModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/users/{id}/images',
             path: {

@@ -14,7 +14,7 @@
   "scripts": {
     "watch": "parcel watch",
     "build": "parcel build",
-    "generate-client": "openapi --input ./cinode-swagger.json --output ./src",
+    "generate-client": "openapi --name Cinode --client axios --input ./cinode-swagger.json --output ./src",
     "lint": "eslint --fix",
     "check": "tsc --noEmit",
     "update-client": "npx ts-node download-file.ts"
@@ -28,11 +28,14 @@
     "@parcel/transformer-typescript-types": "^2.11.0",
     "@types/axios": "^0.14.0",
     "@types/node": "^20.11.20",
-    "axios": "^1.6.7",
     "eslint": "^8.57.0",
     "fs": "^0.0.1-security",
     "openapi-typescript-codegen": "^0.27.0",
     "parcel": "^2.11.0",
     "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "form-data": "^4.0.0",
+    "axios": "^1.6.7"
   }
 }

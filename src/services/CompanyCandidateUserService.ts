@@ -5,9 +5,9 @@
 import type { CompanyCandidateAddCandidateUserModel } from '../models/CompanyCandidateAddCandidateUserModel';
 import type { CompanyUserCandidateModel } from '../models/CompanyUserCandidateModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyCandidateUserService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Create an account for a candidate.
      * No email is sent to the candidate, you will have to communicate login details to the candidate yourself.
@@ -18,12 +18,12 @@ export class CompanyCandidateUserService {
      * @returns CompanyUserCandidateModel All went well
      * @throws ApiError
      */
-    public static addCandidateUserFromCandidate(
+    public addCandidateUserFromCandidate(
         companyId: number,
         id: number,
         requestBody?: CompanyCandidateAddCandidateUserModel,
     ): CancelablePromise<CompanyUserCandidateModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/candidates/{id}/user',
             path: {

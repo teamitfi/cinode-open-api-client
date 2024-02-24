@@ -4,9 +4,9 @@
 /* eslint-disable */
 import type { CompanyUserResumeBaseModel } from '../models/CompanyUserResumeBaseModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyUserResumesService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get company user resumes list
      * Requires module: CompanyUserResume.
@@ -15,11 +15,11 @@ export class CompanyUserResumesService {
      * @returns CompanyUserResumeBaseModel All went well
      * @throws ApiError
      */
-    public static companyUserResumes(
+    public companyUserResumes(
         companyId: number,
         companyUserId: number,
     ): CancelablePromise<Array<CompanyUserResumeBaseModel>> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/resumes',
             path: {

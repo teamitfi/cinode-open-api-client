@@ -4,9 +4,9 @@
 /* eslint-disable */
 import type { AddCompanySubcontractorGroupMemberModel } from '../models/AddCompanySubcontractorGroupMemberModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanySubcontractorGroupMembersService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Add subcontractor group member
      * Requires access level: PartnerManager. Requires module: Partners.
@@ -16,12 +16,12 @@ export class CompanySubcontractorGroupMembersService {
      * @returns void
      * @throws ApiError
      */
-    public static addCompanySubcontractorGroupMember(
+    public addCompanySubcontractorGroupMember(
         companyId: number,
         subcontractorGroupId: number,
         requestBody?: AddCompanySubcontractorGroupMemberModel,
     ): CancelablePromise<void> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/subcontractors/groups/{subcontractorGroupId}/members',
             path: {
@@ -46,12 +46,12 @@ export class CompanySubcontractorGroupMembersService {
      * @returns void
      * @throws ApiError
      */
-    public static deleteCompanySubcontractorGroupMember(
+    public deleteCompanySubcontractorGroupMember(
         companyId: number,
         subcontractorGroupId: number,
         id: number,
     ): CancelablePromise<void> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/v0.1/companies/{companyId}/subcontractors/groups/{subcontractorGroupId}/members/{id}',
             path: {

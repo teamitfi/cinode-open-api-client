@@ -6,9 +6,9 @@ import type { CompanyUserExtendedModel } from '../models/CompanyUserExtendedMode
 import type { TeamMemberAddModel } from '../models/TeamMemberAddModel';
 import type { TeamMemberModel } from '../models/TeamMemberModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyTeamUsersService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * @deprecated
      * Get team members
@@ -17,11 +17,11 @@ export class CompanyTeamUsersService {
      * @returns CompanyUserExtendedModel All went well
      * @throws ApiError
      */
-    public static getTeamUsers(
+    public getTeamUsers(
         companyId: number,
         teamId: number,
     ): CancelablePromise<Array<CompanyUserExtendedModel>> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/teams/{teamId}/users',
             path: {
@@ -45,12 +45,12 @@ export class CompanyTeamUsersService {
      * @returns TeamMemberModel All went well
      * @throws ApiError
      */
-    public static addTeamUser(
+    public addTeamUser(
         companyId: number,
         teamId: number,
         requestBody?: TeamMemberAddModel,
     ): CancelablePromise<Array<TeamMemberModel>> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/teams/{teamId}/users',
             path: {
@@ -76,12 +76,12 @@ export class CompanyTeamUsersService {
      * @returns CompanyUserExtendedModel All went well
      * @throws ApiError
      */
-    public static removeTeamUser(
+    public removeTeamUser(
         companyId: number,
         teamId: number,
         id: number,
     ): CancelablePromise<Array<CompanyUserExtendedModel>> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/v0.1/companies/{companyId}/teams/{teamId}/users/{id}',
             path: {

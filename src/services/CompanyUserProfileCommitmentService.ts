@@ -5,9 +5,9 @@
 import type { CompanyUserProfileCommitmentAddEditModel } from '../models/CompanyUserProfileCommitmentAddEditModel';
 import type { CompanyUserProfileCommitmentModel } from '../models/CompanyUserProfileCommitmentModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyUserProfileCommitmentService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get profile commitment by id
      * @param companyId Company Id
@@ -16,12 +16,12 @@ export class CompanyUserProfileCommitmentService {
      * @returns CompanyUserProfileCommitmentModel All went well
      * @throws ApiError
      */
-    public static companyUserProfileCommitment(
+    public companyUserProfileCommitment(
         companyId: number,
         companyUserId: number,
         id: number,
     ): CancelablePromise<CompanyUserProfileCommitmentModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/commitments/{id}',
             path: {
@@ -47,13 +47,13 @@ export class CompanyUserProfileCommitmentService {
      * @returns CompanyUserProfileCommitmentModel All went well
      * @throws ApiError
      */
-    public static updateCompanyUserProfileCommitment(
+    public updateCompanyUserProfileCommitment(
         id: number,
         companyId: number,
         companyUserId: number,
         requestBody?: CompanyUserProfileCommitmentAddEditModel,
     ): CancelablePromise<CompanyUserProfileCommitmentModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'PUT',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/commitments/{id}',
             path: {
@@ -80,12 +80,12 @@ export class CompanyUserProfileCommitmentService {
      * @returns any All went well
      * @throws ApiError
      */
-    public static deleteCompanyUserProfileCommitment(
+    public deleteCompanyUserProfileCommitment(
         id: number,
         companyId: number,
         companyUserId: number,
     ): CancelablePromise<any> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/commitments/{id}',
             path: {
@@ -109,12 +109,12 @@ export class CompanyUserProfileCommitmentService {
      * @returns CompanyUserProfileCommitmentModel Created
      * @throws ApiError
      */
-    public static newCompanyUserProfileCommitment(
+    public newCompanyUserProfileCommitment(
         companyId: number,
         companyUserId: number,
         requestBody?: CompanyUserProfileCommitmentAddEditModel,
     ): CancelablePromise<any | CompanyUserProfileCommitmentModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/profile/commitments',
             path: {

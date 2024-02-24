@@ -4,9 +4,9 @@
 /* eslint-disable */
 import type { ConvertCompanyUserToAadAccountModel } from '../models/ConvertCompanyUserToAadAccountModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyUserConvertService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Convert company user employee to an AAD account
      * Requires access level: CompanyAdmin.
@@ -16,12 +16,12 @@ export class CompanyUserConvertService {
      * @returns any All went well
      * @throws ApiError
      */
-    public static convertUserToAadAccount(
+    public convertUserToAadAccount(
         companyUserId: number,
         companyId: string,
         requestBody?: ConvertCompanyUserToAadAccountModel,
     ): CancelablePromise<any> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/users/{companyUserId}/convert-aad',
             path: {

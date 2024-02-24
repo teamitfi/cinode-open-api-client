@@ -5,9 +5,9 @@
 import type { CompanyCandidateSkillAddModel } from '../models/CompanyCandidateSkillAddModel';
 import type { CompanyCandidateSkillModel } from '../models/CompanyCandidateSkillModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyCandidateSkillsService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Add a Skill to company candidate
      * Sample request:
@@ -25,12 +25,12 @@ export class CompanyCandidateSkillsService {
          * @returns CompanyCandidateSkillModel All went well
          * @throws ApiError
          */
-        public static newCompanyCandidateSkill(
+        public newCompanyCandidateSkill(
             companyId: number,
             candidateId: number,
             requestBody?: CompanyCandidateSkillAddModel,
         ): CancelablePromise<CompanyCandidateSkillModel> {
-            return __request(OpenAPI, {
+            return this.httpRequest.request({
                 method: 'POST',
                 url: '/v0.1/companies/{companyId}/candidates/{candidateId}/skills',
                 path: {
@@ -59,12 +59,12 @@ export class CompanyCandidateSkillsService {
          * @returns any All went well
          * @throws ApiError
          */
-        public static deleteCompanyCandidateSkill(
+        public deleteCompanyCandidateSkill(
             companyId: number,
             candidateId: number,
             id: number,
         ): CancelablePromise<any> {
-            return __request(OpenAPI, {
+            return this.httpRequest.request({
                 method: 'DELETE',
                 url: '/v0.1/companies/{companyId}/candidates/{candidateId}/skills/{id}',
                 path: {

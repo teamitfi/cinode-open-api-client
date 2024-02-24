@@ -7,9 +7,9 @@ import type { CompanyCandidateAddModel } from '../models/CompanyCandidateAddMode
 import type { CompanyCandidateExtendedModel } from '../models/CompanyCandidateExtendedModel';
 import type { JsonPatchDocument } from '../models/JsonPatchDocument';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyCandidateService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get Candidate by Id
      * Requires access level: CompanyRecruiter. Requires module: Recruitment.
@@ -18,11 +18,11 @@ export class CompanyCandidateService {
      * @returns CompanyCandidateExtendedModel All went well
      * @throws ApiError
      */
-    public static candidate(
+    public candidate(
         companyId: number,
         id: number,
     ): CancelablePromise<CompanyCandidateExtendedModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/candidates/{id}',
             path: {
@@ -45,12 +45,12 @@ export class CompanyCandidateService {
      * @returns CompanyCandidateExtendedModel All went well
      * @throws ApiError
      */
-    public static patchCompanyCandidate(
+    public patchCompanyCandidate(
         companyId: number,
         id: number,
         requestBody?: JsonPatchDocument,
     ): CancelablePromise<CompanyCandidateExtendedModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'PATCH',
             url: '/v0.1/companies/{companyId}/candidates/{id}',
             path: {
@@ -75,11 +75,11 @@ export class CompanyCandidateService {
      * @returns any All went well
      * @throws ApiError
      */
-    public static deleteCompanyCandidate(
+    public deleteCompanyCandidate(
         companyId: number,
         id: number,
     ): CancelablePromise<any> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/v0.1/companies/{companyId}/candidates/{id}',
             path: {
@@ -102,11 +102,11 @@ export class CompanyCandidateService {
      * @returns CompanyCandidateExtendedModel Created
      * @throws ApiError
      */
-    public static addCompanyCandidate(
+    public addCompanyCandidate(
         companyId: number,
         requestBody?: CompanyCandidateAddModel,
     ): CancelablePromise<any | CompanyCandidateExtendedModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/candidates',
             path: {
@@ -131,12 +131,12 @@ export class CompanyCandidateService {
      * @returns any All went well
      * @throws ApiError
      */
-    public static inviteCandidate(
+    public inviteCandidate(
         companyId: number,
         id: number,
         requestBody?: CompanyCandidateAddInviteModel,
     ): CancelablePromise<any> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/candidates/{id}/invite',
             path: {

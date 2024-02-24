@@ -6,9 +6,9 @@ import type { ProjectAssignmentSkillAddModel } from '../models/ProjectAssignment
 import type { ProjectAssignmentSkillEditModel } from '../models/ProjectAssignmentSkillEditModel';
 import type { ProjectAssignmentSkillModel } from '../models/ProjectAssignmentSkillModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class ProjectAssignmentSkillsService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Add Role Skill
      * Requires access level: CompanyManager. Requires module: Assignments.
@@ -19,13 +19,13 @@ export class ProjectAssignmentSkillsService {
      * @returns ProjectAssignmentSkillModel All went well
      * @throws ApiError
      */
-    public static addProjectAssignmentSkill(
+    public addProjectAssignmentSkill(
         companyId: number,
         projectId: number,
         roleId: number,
         requestBody?: ProjectAssignmentSkillAddModel,
     ): CancelablePromise<ProjectAssignmentSkillModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/projects/{projectId}/roles/{roleId}/skills',
             path: {
@@ -53,14 +53,14 @@ export class ProjectAssignmentSkillsService {
      * @returns ProjectAssignmentSkillModel All went well
      * @throws ApiError
      */
-    public static updateProjectAssignmentSkill(
+    public updateProjectAssignmentSkill(
         companyId: number,
         projectId: number,
         roleId: number,
         id: number,
         requestBody?: ProjectAssignmentSkillEditModel,
     ): CancelablePromise<ProjectAssignmentSkillModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'PUT',
             url: '/v0.1/companies/{companyId}/projects/{projectId}/roles/{roleId}/skills/{id}',
             path: {
@@ -88,13 +88,13 @@ export class ProjectAssignmentSkillsService {
      * @returns ProjectAssignmentSkillModel All went well
      * @throws ApiError
      */
-    public static deleteProjectAssignmentSkill(
+    public deleteProjectAssignmentSkill(
         companyId: number,
         projectId: number,
         roleId: number,
         id: number,
     ): CancelablePromise<ProjectAssignmentSkillModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/v0.1/companies/{companyId}/projects/{projectId}/roles/{roleId}/skills/{id}',
             path: {

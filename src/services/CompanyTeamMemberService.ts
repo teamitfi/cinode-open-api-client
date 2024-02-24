@@ -7,9 +7,9 @@ import type { TeamMemberEditModel } from '../models/TeamMemberEditModel';
 import type { TeamMemberModel } from '../models/TeamMemberModel';
 import type { TeamMemberMoveModel } from '../models/TeamMemberMoveModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyTeamMemberService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get team member
      * @param companyId Company Id
@@ -18,12 +18,12 @@ export class CompanyTeamMemberService {
      * @returns TeamMemberModel All went well
      * @throws ApiError
      */
-    public static getTeamMember(
+    public getTeamMember(
         companyId: number,
         teamId: number,
         id: number,
     ): CancelablePromise<TeamMemberModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/teams/{teamId}/members/{id}',
             path: {
@@ -49,13 +49,13 @@ export class CompanyTeamMemberService {
      * @returns TeamMemberModel All went well
      * @throws ApiError
      */
-    public static updateTeamMember(
+    public updateTeamMember(
         companyId: number,
         teamId: number,
         id: number,
         requestBody?: TeamMemberEditModel,
     ): CancelablePromise<TeamMemberModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'PUT',
             url: '/v0.1/companies/{companyId}/teams/{teamId}/members/{id}',
             path: {
@@ -81,12 +81,12 @@ export class CompanyTeamMemberService {
      * @returns any All went well
      * @throws ApiError
      */
-    public static removeTeamMember(
+    public removeTeamMember(
         companyId: number,
         teamId: number,
         id: number,
     ): CancelablePromise<any> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/v0.1/companies/{companyId}/teams/{teamId}/members/{id}',
             path: {
@@ -110,12 +110,12 @@ export class CompanyTeamMemberService {
      * @returns TeamMemberModel All went well
      * @throws ApiError
      */
-    public static addTeamMember(
+    public addTeamMember(
         companyId: number,
         teamId: number,
         requestBody?: TeamMemberAddModel,
     ): CancelablePromise<TeamMemberModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/teams/{teamId}/members',
             path: {
@@ -141,13 +141,13 @@ export class CompanyTeamMemberService {
      * @returns any All went well
      * @throws ApiError
      */
-    public static moveTeamMember(
+    public moveTeamMember(
         companyId: number,
         teamId: number,
         id: number,
         requestBody?: TeamMemberMoveModel,
     ): CancelablePromise<any> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/teams/{teamId}/members/{id}/move',
             path: {

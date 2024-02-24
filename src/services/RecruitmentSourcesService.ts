@@ -4,9 +4,9 @@
 /* eslint-disable */
 import type { RecruitmentSourceModel } from '../models/RecruitmentSourceModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class RecruitmentSourcesService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get recruitment sources
      * Requires access level: CompanyRecruiter. Requires module: Recruitment.
@@ -14,10 +14,10 @@ export class RecruitmentSourcesService {
      * @returns RecruitmentSourceModel All went well
      * @throws ApiError
      */
-    public static recruitmentSources(
+    public recruitmentSources(
         companyId: number,
     ): CancelablePromise<Array<RecruitmentSourceModel>> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/candidates/recruitment-sources',
             path: {

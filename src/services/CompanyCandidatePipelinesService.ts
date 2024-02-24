@@ -4,9 +4,9 @@
 /* eslint-disable */
 import type { CompanyCandidatePipelineModel } from '../models/CompanyCandidatePipelineModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyCandidatePipelinesService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get candidate pipelines
      * Requires access level: CompanyRecruiter. Requires module: Recruitment.
@@ -14,10 +14,10 @@ export class CompanyCandidatePipelinesService {
      * @returns CompanyCandidatePipelineModel All went well
      * @throws ApiError
      */
-    public static candidatePipelines(
+    public candidatePipelines(
         companyId: number,
     ): CancelablePromise<Array<CompanyCandidatePipelineModel>> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/candidates/pipelines',
             path: {

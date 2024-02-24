@@ -5,9 +5,9 @@
 import type { CompanyUserEventTaskAddEditModel } from '../models/CompanyUserEventTaskAddEditModel';
 import type { CompanyUserEventTaskModel } from '../models/CompanyUserEventTaskModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyUserSubcontractorEventTaskService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Creates new subcontractor task event
      * Requires access level: PartnerManager. Requires module: Partners.
@@ -18,12 +18,12 @@ export class CompanyUserSubcontractorEventTaskService {
      * @returns CompanyUserEventTaskModel Created
      * @throws ApiError
      */
-    public static newCompanyUserSubcontractorEventTask(
+    public newCompanyUserSubcontractorEventTask(
         companyId: number,
         companyUserId: number,
         requestBody?: CompanyUserEventTaskAddEditModel,
     ): CancelablePromise<any | CompanyUserEventTaskModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/v0.1/companies/{companyId}/subcontractors/{companyUserId}/events/tasks',
             path: {
@@ -48,12 +48,12 @@ export class CompanyUserSubcontractorEventTaskService {
      * @returns CompanyUserEventTaskModel All went well
      * @throws ApiError
      */
-    public static companyUserSubcontractorEventTask(
+    public companyUserSubcontractorEventTask(
         companyId: number,
         companyUserId: number,
         id: string,
     ): CancelablePromise<CompanyUserEventTaskModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/subcontractors/{companyUserId}/events/tasks/{id}',
             path: {
@@ -79,13 +79,13 @@ export class CompanyUserSubcontractorEventTaskService {
      * @returns CompanyUserEventTaskModel All went well
      * @throws ApiError
      */
-    public static updateCompanyUserSubcontractorEventTask(
+    public updateCompanyUserSubcontractorEventTask(
         companyId: number,
         companyUserId: number,
         id: string,
         requestBody?: CompanyUserEventTaskAddEditModel,
     ): CancelablePromise<CompanyUserEventTaskModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'PUT',
             url: '/v0.1/companies/{companyId}/subcontractors/{companyUserId}/events/tasks/{id}',
             path: {
@@ -111,12 +111,12 @@ export class CompanyUserSubcontractorEventTaskService {
      * @returns any All went well
      * @throws ApiError
      */
-    public static deleteCompanyUserSubcontractorEventTask(
+    public deleteCompanyUserSubcontractorEventTask(
         companyId: number,
         companyUserId: number,
         id: string,
     ): CancelablePromise<any> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'DELETE',
             url: '/v0.1/companies/{companyId}/subcontractors/{companyUserId}/events/tasks/{id}',
             path: {

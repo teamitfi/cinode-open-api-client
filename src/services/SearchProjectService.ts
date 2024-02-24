@@ -5,9 +5,9 @@
 import type { SearchProjectQueryModel } from '../models/SearchProjectQueryModel';
 import type { SearchProjectsResultModel } from '../models/SearchProjectsResultModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class SearchProjectService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get projects list from search criteria
      * Sample request
@@ -34,11 +34,11 @@ export class SearchProjectService {
              * @returns SearchProjectsResultModel All went well
              * @throws ApiError
              */
-            public static searchProject(
+            public searchProject(
                 companyId: number,
                 requestBody?: SearchProjectQueryModel,
             ): CancelablePromise<SearchProjectsResultModel> {
-                return __request(OpenAPI, {
+                return this.httpRequest.request({
                     method: 'POST',
                     url: '/v0.1/companies/{companyId}/projects/search',
                     path: {

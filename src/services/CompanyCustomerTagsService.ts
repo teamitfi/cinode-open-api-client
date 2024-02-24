@@ -5,9 +5,9 @@
 import type { CompanyCustomerModel } from '../models/CompanyCustomerModel';
 import type { CompanyTagModel } from '../models/CompanyTagModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyCustomerTagsService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Edit Tags for Customer
      * Note:
@@ -34,12 +34,12 @@ export class CompanyCustomerTagsService {
                  * @returns CompanyCustomerModel All went well
                  * @throws ApiError
                  */
-                public static editCustomerTags(
+                public editCustomerTags(
                     companyId: number,
                     customerId: number,
                     requestBody?: Array<CompanyTagModel>,
                 ): CancelablePromise<CompanyCustomerModel> {
-                    return __request(OpenAPI, {
+                    return this.httpRequest.request({
                         method: 'POST',
                         url: '/v0.1/companies/{companyId}/customers/{customerId}/tags',
                         path: {

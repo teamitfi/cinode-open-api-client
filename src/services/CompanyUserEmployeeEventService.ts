@@ -4,9 +4,9 @@
 /* eslint-disable */
 import type { CompanyUserEventModel } from '../models/CompanyUserEventModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyUserEmployeeEventService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get employee event
      * Requires access level: CompanyManager.
@@ -16,12 +16,12 @@ export class CompanyUserEmployeeEventService {
      * @returns CompanyUserEventModel All went well
      * @throws ApiError
      */
-    public static companyUserEmployeeEvent(
+    public companyUserEmployeeEvent(
         companyId: number,
         companyUserId: number,
         id: string,
     ): CancelablePromise<CompanyUserEventModel> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/employees/{companyUserId}/events/{id}',
             path: {

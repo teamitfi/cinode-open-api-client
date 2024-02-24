@@ -4,9 +4,9 @@
 /* eslint-disable */
 import type { CompanyCustomerExtendedModel } from '../models/CompanyCustomerExtendedModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CompanyCustomersExtendedService {
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Get extended company customers list
      * Requires access level: CompanyManager. Requires module: Customers.
@@ -14,10 +14,10 @@ export class CompanyCustomersExtendedService {
      * @returns CompanyCustomerExtendedModel All went well
      * @throws ApiError
      */
-    public static customersExtended(
+    public customersExtended(
         companyId: number,
     ): CancelablePromise<Array<CompanyCustomerExtendedModel>> {
-        return __request(OpenAPI, {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/v0.1/companies/{companyId}/customers/extended',
             path: {
