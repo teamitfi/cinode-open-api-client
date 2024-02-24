@@ -3,6 +3,8 @@
   "version": "1.0.10",
   "description": "",
   "src": "src/index.ts",
+  "main": "src/index.ts",
+  "type": "commonjs",
   "scripts": {
     "generate-client": "openapi --name Cinode --client axios --input ./cinode-swagger.json --output ./src",
     "lint": "eslint --fix",
