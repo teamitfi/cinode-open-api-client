@@ -1,17 +1,33 @@
 {
-  "name": "cinode-open-api-tmp",
-  "type": "module",
+  "name": "cinode-open-api-client",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.ts",
+  "source": "src/index.ts",
+  "module": "dist/index.js",
+  "types": "dist/types.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
   "scripts": {
-    "build": "openapi --input ./cinode-open-api.json --output ./src"
+    "watch": "parcel watch",
+    "build": "parcel build",
+    "generate-client": "openapi --input ./cinode-open-api.json --output ./src",
+    "lint": "eslint",
+    "check": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@parcel/packager-ts": "^2.11.0",
+    "@parcel/transformer-typescript-tsc": "^2.11.0",
+    "@parcel/transformer-typescript-types": "^2.11.0",
+    "eslint": "^8.57.0",
     "openapi-typescript-codegen": "^0.27.0",
+    "parcel": "^2.11.0",
     "typescript": "^5.3.3"
   }
 }
