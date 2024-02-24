@@ -1,12 +1,11 @@
 {
   "name": "cinode-open-api-client",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "",
-  "main": "dist/main.js",
+  "main": "dist/index.js",
   "source": "src/index.ts",
   "types": "dist/types.d.ts",
   "module": "dist/module.js",
-  "context": "node",
   "exports": {
     ".": {
       "import": "./dist/index.js",
