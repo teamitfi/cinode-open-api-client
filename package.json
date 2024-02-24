@@ -4,7 +4,6 @@
   "description": "",
   "source": "src/index.ts",
   "types": "dist/types.d.ts",
-  "type": "module",
   "scripts": {
     "watch": "parcel watch",
     "build": "rimraf ./dist && parcel build",
