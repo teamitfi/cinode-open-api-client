@@ -1,14 +1,20 @@
 {
   "name": "cinode-open-api-client",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "source": "src/index.ts",
-  "module": "dist/index.js",
+  "main": "dist/main.js",
+  "module": "dist/module.js",
   "types": "dist/types.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.js",
       "require": "./dist/index.js"
+    }
+  },
+  "targets": {
+    "default": {
+      "distDir": "./dist"
     }
   },
   "scripts": {
@@ -28,6 +34,7 @@
     "@parcel/transformer-typescript-types": "^2.11.0",
     "@types/axios": "^0.14.0",
     "@types/node": "^20.11.20",
+    "buffer": "^6.0.3",
     "eslint": "^8.57.0",
     "fs": "^0.0.1-security",
     "openapi-typescript-codegen": "^0.27.0",
@@ -35,7 +42,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "form-data": "^4.0.0",
-    "axios": "^1.6.7"
+    "axios": "^1.6.7",
+    "form-data": "^4.0.0"
   }
 }
