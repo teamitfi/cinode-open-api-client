@@ -4,7 +4,7 @@
 /* eslint-disable */
 import type { BaseHttpRequest } from './core/BaseHttpRequest';
 import type { OpenAPIConfig } from './core/OpenAPI';
-import { AxiosHttpRequest } from './core/AxiosHttpRequest';
+import { NodeHttpRequest } from './core/NodeHttpRequest';
 import { AbsenceService } from './services/AbsenceService';
 import { AbsencesService } from './services/AbsencesService';
 import { AbsenceTypeService } from './services/AbsenceTypeService';
@@ -290,7 +290,7 @@ export class Cinode {
     public readonly skillSearch: SkillSearchService;
     public readonly skillSearchTerm: SkillSearchTermService;
     public readonly request: BaseHttpRequest;
-    constructor(config?: Partial<OpenAPIConfig>, HttpRequest: HttpRequestConstructor = AxiosHttpRequest) {
+    constructor(config?: Partial<OpenAPIConfig>, HttpRequest: HttpRequestConstructor = NodeHttpRequest) {
         this.request = new HttpRequest({
             BASE: config?.BASE ?? 'https://api.cinode.com',
             VERSION: config?.VERSION ?? '0.1',
